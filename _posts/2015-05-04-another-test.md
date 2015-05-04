@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 
 ## Just creating a new page to using Prose from Development Seed to see how it works
