@@ -3,7 +3,7 @@ layout: post
 title: "2015-5-8-Patent-Datasets"
 author: "Paul Oldham"
 date: "8 May 2015"
-published: false
+published: true
 ---
 
 In this article we introduce the patent datasets developed for the Open Source Patent Analytics Project as training sets for patent analytics. The datasets will be used for the walkthroughs developed by the project. The datasets will grow over time but we will briefly introduce them and explain how to access them. 
