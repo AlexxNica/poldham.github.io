@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Here is a new post
+title: Images Post
 published: true
 ---
 

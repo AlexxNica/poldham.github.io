@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Creating a website on Github using Rmarkdown with Jekyll and servr"
-published: true
+published: false
 ---
 
 I am pretty new to using R and to GitHub, but I liked the idea of creating a static website on GitHub and then publishing Rmarkdown both to my project repository (on patent analytics) and to a static website. What I didn't want to bother with, amid learning R, was messing around with Content Management Systems, databases, hosting packages and complicated templates. 
