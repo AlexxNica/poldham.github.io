@@ -2,7 +2,7 @@
 title: "About the Open Source Patent Analytics Project"
 author: "Paul Oldham"
 date: "3 March 2015"
-published: yes
+published: false
 layout: post
 ---
 
