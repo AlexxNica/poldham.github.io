@@ -3,7 +3,7 @@ title: "Understanding Patent Documents and Data Fields"
 author: "Paul Oldham"
 date: "23 March 2015"
 layout: post
-published: yes
+published: false
 ---
 
 This article provides a walkthrough of patent data fields for those who are completely new to patent analytics or want to understand the workings of patent data a little bit better. A video version of the walkthrough is available [here](https://youtu.be/RDPlIUB0_QE?list=PLsZOGmKUMi56dAuqSEHjVWkxEf3MbXlQG) and the slide deck is available for download in [.pdf](https://github.com/poldham/opensource-patent-analytics/raw/master/C_obtaining_patent_data/understanding_data_fields/patent_data_fields_OM.pdf), [powerpoint](https://github.com/poldham/opensource-patent-analytics/raw/master/C_obtaining_patent_data/understanding_data_fields/patent_data_fields_OM.pptx) and apple keynote(https://github.com/poldham/opensource-patent-analytics/raw/master/C_obtaining_patent_data/understanding_data_fields/patent_data_fields_OM.key) from [GitHub](https://github.com/poldham/opensource-patent-analytics/tree/master/C_obtaining_patent_data/understanding_data_fields.

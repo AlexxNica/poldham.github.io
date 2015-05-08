@@ -4,6 +4,7 @@ title: "Reading and Writing an Excel File in R"
 author: "Paul Oldham"
 date: "24 March 2015"
 output: html_document
+published: false
 ---
 
 The [CRAN Project](http://cran.r-project.org/doc/manuals/r-release/R-data.html#Reading-Excel-spreadsheets) has the following to say about importing Excel files into R. 
