@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "2015-5-8-Patent-Datasets"
+title: "Patent Analytics Training Datasets"
 author: "Paul Oldham"
 date: "8 May 2015"
 published: true
