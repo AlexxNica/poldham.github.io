@@ -333,17 +333,29 @@ It can be worth printing the top of the file to check that the clean up has work
 head(pizzasliced3)
 ```
 
-The inventors and applicant fields are now free of the encoding problem. We are now in a position to try again with the table data frame. 
+The inventors and applicant fields are now free of the encoding problem. We are now in a position to try again with the table data frame using `tbl_df()`. 
 
 ```{r}
 pizzasliced4 <- tbl_df(pizzasliced3)
 ```
 
+Let's print pizzasliced4. 
+
+```{r}
+pizzasliced4
+```
 
 
 
 
-We will now have a dataset with 1,707 rows and 24 columns. When you print the results it should look something like this with the columns as character fields (not factors).
+We can now see the first ten rows of a data frame that contains 1,707 rows and 24 columns. It will still be a little crunched but is much more readable. Also note that most of the columns are character fields (not factors).
+
+Using `dplyr` we can call up a View of the dataset in a new pop up window. This can be very useful for inspecting datasets.
+
+```{r}
+View(pizzasliced4)
+```
+
 
 Let's finish off here by writing pizzasliced4 back out to a .csv for practice. 
 
@@ -388,7 +400,7 @@ ritonavir3 <- read_csv("/Users/pauloldham17inch/opensource-patent-analytics/2_da
 ```
 
 
-This will create a data frame and then display problems in red. The problems can be investigated by typing `problems()` in the console. As with `read.csv2()`, the `readr` function `read_csv2()` will read files with the `";"` as the separator. 
+This will create a data frame and then display problems in red. The problems can be investigated by typing `problems()` in the console. We will ignore these in this case. As with `read.csv2()`, the `readr` function `read_csv2()` will read files with the `";"` as the separator. 
 
 To see the read_csv arguments let's call help
 

@@ -3,7 +3,7 @@ layout: post
 title: "Importing CSV files into R"
 author: "Paul Oldham"
 date: "29 April 2015"
-output: html_document
+published: true
 ---
 
 Comma separated value files (or .csv) files are one of the most common and useful ways for sharing data. This includes patent data. 
@@ -753,18 +753,65 @@ head(pizzasliced3)
 ## 6                                              NA
 {% endhighlight %}
 
-The inventors and applicant fields are now free of the encoding problem. We are now in a position to try again with the table data frame. 
+The inventors and applicant fields are now free of the encoding problem. We are now in a position to try again with the table data frame using `tbl_df()`. 
 
 
 {% highlight r %}
 pizzasliced4 <- tbl_df(pizzasliced3)
 {% endhighlight %}
 
+Let's print pizzasliced4. 
+
+
+{% highlight r %}
+pizzasliced4
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Source: local data frame [1,707 x 24]
+## 
+##                                                                          Title
+## 1                                                                   PIZZA TRAY
+## 2                                      COOKING METHOD OF GREEN-TEA ADDED PIZZA
+## 3                                                   METHOD FOR COOKING A PIZZA
+## 4                               Pizza preparation and delivery method and unit
+## 5                                       Method of making laminated pizza crust
+## 6      Container for transporting heated food, particularly pizza and the like
+## 7  Method of configuring a slice of a pizza-type pie and an apparatus for prep
+## 8                                                     Box games and activities
+## 9  Method and user interface for specifying toppings and their placement on a 
+## 10                                      Machine for flattening pastry or dough
+## ..                                                                         ...
+## Variables not shown: Publication.number (chr), Publication.date (chr),
+##   Inventor.s. (chr), Applicant.s. (chr), International.classification
+##   (chr), Cooperative.Patent.Classification (chr), Application.number
+##   (chr), Date.of.application (int), Priority.number.s. (chr),
+##   Patents.cited.in.the.search.report (chr),
+##   Literature.cited.in.the.search.report (chr),
+##   Patents.cited.during.examination (chr),
+##   Literature.cited.during.examination (lgl), Other.patent.citations (lgl),
+##   Other.literature.citations (lgl), Patents.used.in.opposition (chr),
+##   Literature.used.in.opposition (lgl), Patents.cited.by.the.applicant
+##   (chr), Literature.cited.by.the.applicant (lgl),
+##   International.search.citation (chr), International.search.NPL.citation
+##   (chr), Supplementary.international.search.citation (lgl),
+##   Supplementary.international.search.NPL.citation (lgl)
+{% endhighlight %}
 
 
 
 
-We will now have a dataset with 1,707 rows and 24 columns. When you print the results it should look something like this with the columns as character fields (not factors).
+We can now see the first ten rows of a data frame that contains 1,707 rows and 24 columns. It will still be a little crunched but is much more readable. Also note that most of the columns are character fields (not factors).
+
+Using `dplyr` we can call up a View of the dataset in a new pop up window. This can be very useful for inspecting datasets.
+
+
+{% highlight r %}
+View(pizzasliced4)
+{% endhighlight %}
+
 
 Let's finish off here by writing pizzasliced4 back out to a .csv for practice. 
 
@@ -815,7 +862,7 @@ ritonavir3 <- read_csv("/Users/pauloldham17inch/opensource-patent-analytics/2_da
 {% endhighlight %}
 
 
-This will create a data frame and then display problems in red. The problems can be investigated by typing `problems()` in the console. As with `read.csv2()`, the `readr` function `read_csv2()` will read files with the `";"` as the separator. 
+This will create a data frame and then display problems in red. The problems can be investigated by typing `problems()` in the console. We will ignore these in this case. As with `read.csv2()`, the `readr` function `read_csv2()` will read files with the `";"` as the separator. 
 
 To see the read_csv arguments let's call help
 
