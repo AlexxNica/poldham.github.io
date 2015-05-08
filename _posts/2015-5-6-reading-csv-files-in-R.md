@@ -35,7 +35,7 @@ You now have a dataset called ritonavir in R. That is how easy it is. You can ta
 
 We can improve on that by using `head(ritonavir)` but it is still a little difficult to view. We will come back to this in turning the data into a table data frame (`tbl_df()`). 
 
-First, let's look at the function read.csv and its arguments in a bit more detail to understand what is going on. 
+First, let's look at the function read.csv. R functions have settings called arguments that can be used to control what is going on.  
 
 
 {% highlight r %}
@@ -209,7 +209,7 @@ Let's take a look at the options for writing .csv files by calling help.
 ?write.csv
 {% endhighlight %}
 
-write.csv is a function in `write.table`.
+write.csv is a function in `write.table`. Let's take a look at the arguments. 
 
 `write.table(x, file = "", append = FALSE, quote = TRUE, sep = " ",
             eol = "\n", na = "NA", dec = ".", row.names = TRUE,
@@ -282,7 +282,7 @@ What we now need to do is to transform this into a list. To do that we will use 
 
 
 {% highlight r %}
-pizzasliced1 <- lapply(pizzasliced, read.csv, header = TRUE, stringsAsFactors = FALSE) ##Iterate over each file, reading in the data. Note that I have forced the encoding to UTF-8 to deal with corruption problem. 
+pizzasliced1 <- lapply(pizzasliced, read.csv, header = TRUE, stringsAsFactors = FALSE)
 {% endhighlight %}
 
 
@@ -595,12 +595,6 @@ pizzasliced3 <- tbl_df(pizzasliced2)
 
 
 
-{% highlight text %}
-## Error in eval(expr, envir, enclos): could not find function "tbl_df"
-{% endhighlight %}
-
-
-
 Houston, we have a problem. That problem is that somewhere in the esp@cenet data that makes up the pizza_sliced dataset there is an issue with the character encoding that is preventing the `dplyr` function from working. Typically this will mean that the character encoding has become messed up in the underlying data. This of course is one of the reasons it is always worth checking the data first (as is suggested in this video [here](https://youtu.be/YYaMEbJW7Qw?list=PLsZOGmKUMi54n8R06U1HmxNywt0bAFays)). Clearly that is OK for small datasets but for large or multi-part datasets is a problem. So, another solution is needed. The problem as it turns out is in the inventor and the applicant fields in the space between the name and the country code entry which looks like this in Excel BIANCHI MARCO‰Ûâ[IT] and merely throws a ??? in Open Office Calc. 
 
 Working out how to solve this problem in R could take a while (although string replacement is a good bet). The issue therefore is how to get to a solution as quickly as possible. That solution is to take what we learned above to write the new data.frame to a .csv file, then open the file in Open Office or Excel and use find and replace on the corrupted strings (as is suggested in this video [here](https://youtu.be/YYaMEbJW7Qw?list=PLsZOGmKUMi54n8R06U1HmxNywt0bAFays)). 
@@ -768,12 +762,6 @@ pizzasliced4 <- tbl_df(pizzasliced3)
 
 
 
-{% highlight text %}
-## Error in eval(expr, envir, enclos): could not find function "tbl_df"
-{% endhighlight %}
-
-
-
 
 
 We will now have a dataset with 1,707 rows and 24 columns. When you print the results it should look something like this with the columns as character fields (not factors).
@@ -783,12 +771,6 @@ Let's finish off here by writing pizzasliced4 back out to a .csv for practice.
 
 {% highlight r %}
 write.csv(pizzasliced4, "pizzasliced4", row.names = FALSE)
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Error in is.data.frame(x): object 'pizzasliced4' not found
 {% endhighlight %}
 
 While we would probably choose more informative filenames it is good practice to output work before moving on to other tasks or at some point it will be lost. 
@@ -898,7 +880,7 @@ The full list of arguments for `write_csv()` at the moment is
 
  `append = TRUE` will append the table to the existing file. `col_names = TRUE` will write column names at the top of the file. Expect more arguments to be added as `readr` develops. 
 
-Bear in mind that `readr` does not possess the functionality of `read.csv` or `write.csv` in `read.table`. Part of the aim of `readr' is simplification based on the idea of doing a limited number of things well. Therefore, it is unlikely that `readr` will ever be as comprehensive as the `read.table` equivalents in the future. However, `readr` is likely to become the go to package because of its simplicity for most needs and because it links with the wider family of `tidyr`, `plyr` and `dplyr` packages under development at RStudio to make data wrangling and analysis easier. 
+Bear in mind that `readr` does not possess the functionality of `read.csv` or `write.csv` in `read.table`. Part of the aim of `readr` is simplification based on the idea of doing a limited number of things well. Therefore, it is unlikely that `readr` will ever be as comprehensive as the `read.table` equivalents in the future. However, `readr` is likely to become the go to package because of its simplicity for most needs and because it links with the wider family of `tidyr`, `plyr` and `dplyr` packages under development at RStudio to make data wrangling and analysis easier. 
 
 ##Round Up
 

@@ -34,7 +34,7 @@ You now have a dataset called ritonavir in R. That is how easy it is. You can ta
 
 We can improve on that by using `head(ritonavir)` but it is still a little difficult to view. We will come back to this in turning the data into a table data frame (`tbl_df()`). 
 
-First, let's look at the function read.csv and its arguments in a bit more detail to understand what is going on. 
+First, let's look at the function read.csv. R functions have settings called arguments that can be used to control what is going on.  
 
 ```{r eval=FALSE}
 ?read.csv ##calls the description for read.table.
@@ -186,7 +186,7 @@ Let's take a look at the options for writing .csv files by calling help.
 ?write.csv
 ```
 
-write.csv is a function in `write.table`.
+write.csv is a function in `write.table`. Let's take a look at the arguments. 
 
 `write.table(x, file = "", append = FALSE, quote = TRUE, sep = " ",
             eol = "\n", na = "NA", dec = ".", row.names = TRUE,
@@ -238,7 +238,7 @@ class(pizzasliced)
 What we now need to do is to transform this into a list. To do that we will use the function `lapply()` for list apply. In this case we are saying "apply list apply to the R character object pizzasliced and then apply the function `read.csv` ensuring that headings are included from column names" as below. 
 
 ```{r}
-pizzasliced1 <- lapply(pizzasliced, read.csv, header = TRUE, stringsAsFactors = FALSE) ##Iterate over each file, reading in the data. Note that I have forced the encoding to UTF-8 to deal with corruption problem. 
+pizzasliced1 <- lapply(pizzasliced, read.csv, header = TRUE, stringsAsFactors = FALSE)
 ```
 
 
