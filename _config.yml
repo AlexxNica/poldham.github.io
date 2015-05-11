@@ -21,11 +21,11 @@ footer-links:
   email: opensourcepatentanalytics@gmail.com
   facebook:
   flickr:
-  github: https://github.com/poldham/opensource-patent-analytics
+  github: poldham/opensource-patent-analytics
   instagram:
   linkedin:
   pinterest:
-  rss: # just type anything here for a working RSS icon, make sure you set the "url" above!
+  rss: http://feeds.feedburner.com/OpenSourcePatentAnalytics
   twitter: OpenPatAnalysis
   stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
   youtube: channel/UCwFhEASbKdm6WYoax73XsOw

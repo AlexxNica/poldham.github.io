@@ -7,9 +7,8 @@ permalink: /about/
 This is the home page of the Open Source Patent Analytics project. The aim of the project 
 is to make patent data more accessible by identifying open source tools that can be used 
 in analysis and a series of tutorials and walkthroughs of common tasks in patent analysis.
-The project is supported by the World Intellectual Property Organization (WIPO) as part of 
-its work with developing countries under the [WIPO Development Agenda](http://www.wipo.int/ip-development/en/agenda/). However, any opinions expressed
-on this site are exclusively those of the author and should not be interpreted as reflecting or
+The project has been commissioned by the World Intellectual Property Organization (WIPO) and will be published as the WIPO Manual on Open Source Patent Analytics. However, any opinions expressed
+on this site are exclusively those of the authors and should not be interpreted as reflecting or
 expressing the views of the World Intellectual Property Organization. 
 
 The basic idea behing the project is that anyone should be able to access and analyse patent

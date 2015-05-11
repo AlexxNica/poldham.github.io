@@ -8,7 +8,7 @@ published: false
 
 Comma separated value files (or .csv) files are one of the most common and useful ways for sharing data. This includes patent data. 
 
-This walkthrough covers the basics of importing .csv files into R and writing .csv files. We will use the freely available [ritonavir](https://drive.google.com/open?id=0B4piiKOCkRPDRlBlcGpxR0tMTms&authuser=0) patent dataset as the example. You can grab the datasets by either forking or downloading the [GitHub repository](https://github.com/poldham/opensource-patent-analytics). While we use patent data as the example, this will work for other types of .csv data. 
+This walkthrough covers the basics of importing .csv files into R and writing .csv files. We will use the freely available [ritonavir](https://drive.google.com/open?id=0B4piiKOCkRPDRlBlcGpxR0tMTms&authuser=0) patent dataset as the example. You can grab the datasets by either forking or downloading the [GitHub repository](https://github.com/poldham/opensource-patent-analytics) or downloading the [zip file](https://github.com/poldham/opensource-patent-analytics/blob/master/2_datasets/datasets.zip?raw=true). While we use patent data as the example, this will work for other types of .csv data. 
 
 We will cover the following approaches to importing and writing .csv files here:
 
@@ -37,7 +37,7 @@ We can improve on that by using `head(ritonavir)` but it is still a little diffi
 First, let's look at the function read.csv. R functions have settings called arguments that can be used to control what is going on.  
 
 ```{r eval=FALSE}
-?read.csv ##calls the description for read.table.
+?read.csv
 ```
 
 `read.csv(file, header = TRUE, sep = ",", quote = "\"", dec = ".", fill = TRUE, comment.char = "", ...)`
@@ -59,6 +59,7 @@ This means that we would often want a `read.csv()` function with the following a
 
 ```{r eval=FALSE}
 ritonavir1 <- read.csv("yourfilenamepath.csv", sep = ",", na.strings = "NA", strip.white = TRUE, stringsAsFactors = FALSE)
+
 ```
 
 
@@ -78,7 +79,7 @@ class(ritonavir1) ##class is "data.frame"
 If we print the ritonavir R object we will get the first 500 rows of data. 
 
 ```{r eval=FALSE}
-ritonavir1 ## shows the first 500 rows
+ritonavir1
 ```
 
 That is not terribly helpful because we are overwhelmed with information and can't see everything as a snap shot. The solution to this is to install and load the recent `dplyr` package. We will be using this package a lot in the patent analysis tutorials so, if you don't have it already, now is a good time.
@@ -112,7 +113,7 @@ That is a lot easier to read than our original (try typing ritonavir into the co
 There are two points to note here. 
 
 1. Spaces in column names such as publication number are filled with full stops. 
-2. More importantly, by default character vectors are converted to factors (characters backed by a hidden number). While this can be very useful, most of the time it is an inconvenience when working with character vectors.
+2. More importantly, by default character vectors are converted to factors (characters backed by a hidden number). It therefore makes sense to always use `StringsAsFactors = FALSE` unless you actually want columns to import as factors.
 
 ##Reading a .csv from the web
 
@@ -179,7 +180,7 @@ To write the file with a new file name we will use `write.csv()`.
 write.csv(ritonavir2, "ritonavir2.csv")
 ```
 
-This will write a file called ritonavir2.csv to your working directory. If you take a look at the file note that an extra column will have been added at the beginning (we will come back to that) and column names will now contain fullstops instead of spaces. 
+This will write a file called ritonavir2.csv to your working directory. If you take a look at the file note that an extra column will have been added at the beginning (we will come back to that) and column names will now contain full stops instead of spaces. 
 
 Let's take a look at the options for writing .csv files by calling help. 
 ```{r}
