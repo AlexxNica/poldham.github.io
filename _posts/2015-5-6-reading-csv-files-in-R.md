@@ -3,7 +3,7 @@ layout: post
 title: "Importing CSV files into R"
 author: "Paul Oldham"
 date: "29 April 2015"
-published: true
+published: false
 ---
 
 Comma separated value files (or .csv) files are one of the most common and useful ways for sharing data. This includes patent data. 
