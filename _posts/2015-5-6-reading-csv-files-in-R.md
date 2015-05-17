@@ -6,9 +6,11 @@ date: "29 April 2015"
 published: true
 ---
 
+As part of the WIPO Manual on Open Source Patent Analytics project we will be working with patent data in R using [RStudio](http://www.rstudio.com). If you do not have a copy of RStudio follow the simple instructions for installing on your platform [here](http://www.rstudio.com/products/rstudio/download/). There are lots of resources on the site to help you get started including [online learning](http://www.rstudio.com/resources/training/online-learning/), [videos](http://www.rstudio.com/resources/webinars/), and [cheatsheets](http://www.rstudio.com/resources/cheatsheets/). The excellent [R-Bloggers site](http://www.r-bloggers.com) will demonstrate why it is worth investing time in R when working with patent data.  
+
 Comma separated value files (or .csv) files are one of the most common and useful ways for sharing data. This includes patent data. 
 
-This walkthrough covers the basics of importing .csv files into R and writing .csv files. We will use the freely available [ritonavir](https://drive.google.com/open?id=0B4piiKOCkRPDRlBlcGpxR0tMTms&authuser=0) patent dataset as the example. You can grab the datasets by either forking or downloading the [GitHub repository](https://github.com/poldham/opensource-patent-analytics). While we use patent data as the example, this will work for other types of .csv data. 
+This walk through covers the basics of importing .csv files into R and writing .csv files. We will use the freely available [ritonavir](https://drive.google.com/open?id=0B4piiKOCkRPDRlBlcGpxR0tMTms&authuser=0) patent dataset as the example. You can grab the datasets by either forking or downloading the [GitHub repository](https://github.com/poldham/opensource-patent-analytics) or downloading the [zip file](https://github.com/poldham/opensource-patent-analytics/blob/master/2_datasets/datasets.zip?raw=true). While we use patent data as the example, this will work for other types of .csv data. 
 
 We will cover the following approaches to importing and writing .csv files here:
 
@@ -39,7 +41,7 @@ First, let's look at the function read.csv. R functions have settings called arg
 
 
 {% highlight r %}
-?read.csv ##calls the description for read.table.
+?read.csv
 {% endhighlight %}
 
 `read.csv(file, header = TRUE, sep = ",", quote = "\"", dec = ".", fill = TRUE, comment.char = "", ...)`
@@ -70,7 +72,7 @@ Note here that the use of `sep = ","` is the condition for stripping leading and
 
 If you intend to split the inventor and applicant data following import you may want to wait because the process will generate white space. It is always possible to write a .csv file after the cleaning process and reimport it with `strip.white` set to TRUE along with `sep= ","`. We will write a .csv file below. 
 
-We have not specified `skip = n` in the above as the column headers are in the first row in the original data. But, there are lots of occassions when skip can be useful. 
+We have not specified `skip = n` in the above as the column headers are in the first row in the original data. But, there are lots of occasions when skip can be useful. 
 
 Lets look at the type or class of object that has been created from our latest import. 
 
@@ -83,7 +85,7 @@ If we print the ritonavir R object we will get the first 500 rows of data.
 
 
 {% highlight r %}
-ritonavir1 ## shows the first 500 rows
+ritonavir1
 {% endhighlight %}
 
 That is not terribly helpful because we are overwhelmed with information and can't see everything as a snap shot. The solution to this is to install and load the recent `dplyr` package. We will be using this package a lot in the patent analysis tutorials so, if you don't have it already, now is a good time.
@@ -121,7 +123,7 @@ That is a lot easier to read than our original (try typing ritonavir into the co
 There are two points to note here. 
 
 1. Spaces in column names such as publication number are filled with full stops. 
-2. More importantly, by default character vectors are converted to factors (characters backed by a hidden number). While this can be very useful, most of the time it is an inconvenience when working with character vectors.
+2. More importantly, by default character vectors are converted to factors (characters backed by a hidden number). It therefore makes sense to always use `StringsAsFactors = FALSE` unless you actually want columns to import as factors.
 
 ##Reading a .csv from the web
 
@@ -201,7 +203,7 @@ To write the file with a new file name we will use `write.csv()`.
 write.csv(ritonavir2, "ritonavir2.csv")
 {% endhighlight %}
 
-This will write a file called ritonavir2.csv to your working directory. If you take a look at the file note that an extra column will have been added at the beginning (we will come back to that) and column names will now contain fullstops instead of spaces. 
+This will write a file called ritonavir2.csv to your working directory. If you take a look at the file note that an extra column will have been added at the beginning (we will come back to that) and column names will now contain full stops instead of spaces. 
 
 Let's take a look at the options for writing .csv files by calling help. 
 
@@ -235,7 +237,7 @@ We will now take a look at a somewhat unusual import case. That is importing mul
 
 ##Reading in multiple .csv files
 
-On some occassions we might want to read in multiple .csv files at the same time. Typically this will be where a patent dataset has been split into multiple files. If you would like to follow this discussion then download the [pizza_sliced dataset](https://drive.google.com/folderview?id=0B4piiKOCkRPDVUxhVVhkbGtQLVU&usp=sharing) which contains five .csv files plus a ReadMe file. 
+On some occasions we might want to read in multiple .csv files at the same time. Typically this will be where a patent dataset has been split into multiple files. If you would like to follow this discussion then download the [pizza_sliced dataset](https://drive.google.com/folderview?id=0B4piiKOCkRPDVUxhVVhkbGtQLVU&usp=sharing) which contains five .csv files plus a ReadMe file. 
 
 Reading in multiple files is a task that is a little trickier than it should be. However, the approach below will work (assuming you have the files in a local folder). My suggestion would be to remove the Read Me file from the downloaded set for this exercise.
 
@@ -246,7 +248,7 @@ pizzasliced <- list.files("/Users/pauloldham17inch/Desktop/open_source_master/2_
 
 
 
-If we print pizza sliced we will now see a lsit of the full name of files including the full path. It should look something like that below.
+If we print pizza sliced we will now see a list of the full name of files including the full path. It should look something like that below.
 
 
 {% highlight r %}
@@ -330,6 +332,12 @@ pizzasliced2 <- ldply(pizzasliced1)
 {% endhighlight %}
 
 
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "ldply"
+{% endhighlight %}
+
+
 If we print pizzasliced2 into the console we will see another set of data rushing by. However, if we check the class we will see that we now have a data.frame object. A data.frame is actually a list of the class data.frame. To test that try typing `typeof(pizzasliced2)` into the console and the result will be "list"). 
 
 
@@ -340,7 +348,7 @@ class(pizzasliced2)
 
 
 {% highlight text %}
-## [1] "data.frame"
+## Error in eval(expr, envir, enclos): object 'pizzasliced2' not found
 {% endhighlight %}
 
 
@@ -354,132 +362,7 @@ head(pizzasliced2)
 
 
 {% highlight text %}
-##                                                                     Title
-## 1                                                              PIZZA TRAY
-## 2                                 COOKING METHOD OF GREEN-TEA ADDED PIZZA
-## 3                                              METHOD FOR COOKING A PIZZA
-## 4                          Pizza preparation and delivery method and unit
-## 5                                  Method of making laminated pizza crust
-## 6 Container for transporting heated food, particularly pizza and the like
-##                  Publication.number Publication.date
-## 1                       CA93181 (S)       24/08/2001
-## 2                 KR20010107868 (A)       07/12/2001
-## 3     CA2731260 (A1); CA2731260 (C)       14/09/2000
-## 4 US2002048624 (A1); US6858243 (B2)       25/04/2002
-## 5                     US6126977 (A)       03/10/2000
-## 6 US2002040862 (A1); US6601758 (B2)       11/04/2002
-##                                                                                                                           Inventor.s.
-## 1                                                                                                                                    
-## 2                                                                                                         YOU YEN SIL\x89\xdb\xe2[KR]
-## 3                                                       HEDRINGTON JAMES ALAN\x89\xdb\xe2[US];  DRESSEL BRENT WILLIAM\x89\xdb\xe2[US]
-## 4 BLANCHET JEAN\x89\xdb\xe2[FR];  CATHELIN HERVE\x89\xdb\xe2[FR];  HEBERT CHRISTIAN\x89\xdb\xe2[FR];  NOUYRIT OLIVIER\x89\xdb\xe2[FR]
-## 5                                                                                                      BUBAR RONALD O\x89\xdb\xe2[US]
-## 6                                                                                                      LIZZIO FILIPPO\x89\xdb\xe2[IT]
-##                            Applicant.s.
-## 1 SCHWAN S FOOD MFG INC\x89\xdb\xe2[US]
-## 2           YOU YEN SIL\x89\xdb\xe2[KR]
-## 3        NAT PRESTO IND\x89\xdb\xe2[US]
-## 4             NESTEC SA\x89\xdb\xe2[US]
-## 5       PAULUCCI JENO F\x89\xdb\xe2[US]
-## 6        TERMOPIZZA SRL\x89\xdb\xe2[US]
-##                                                                   International.classification
-## 1                                                                                             
-## 2                                                                                    A21D13/00
-## 3                                                     A23L1/01; A21B1/00; A47J37/04; A47J37/06
-## 4 A23L1/48; A21B1/00; A21D8/00; A21D13/00; A21D15/02; B60P3/025; B60P3/14; A23L1/00; A21D13/00
-## 5                     A21C3/02; A21C11/00; A21D8/00; A21D8/02; A21D13/00; A21D13/08; A21D13/00
-## 6                                         B65D77/04; B65D81/26; B65D85/36; B65D85/36; B65D5/50
-##                                                        Cooperative.Patent.Classification
-## 1                                                                                       
-## 2                                                                                       
-## 3                                                                A47J37/0611; A47J37/043
-## 4                        A21D13/007; A21B1/00; A21D8/00; A21D15/02; B60P3/0257; B60P3/14
-## 5                                A21D13/0061; A21C3/02; A21C11/004; A21D8/02; A21D13/007
-## 6 B65D77/0433; B65D81/262; B65D81/263; B65D85/36; B65D2585/366; Y10S229/906; Y10S229/902
-##   Application.number Date.of.application
-## 1     CANDAT0093181F                   0
-## 2      KR20010069326            20011105
-## 3      CA20002731260            20000310
-## 4      US20010982377            20011018
-## 5      US19970968900            19971106
-## 6      US20010963393            20010927
-##                                Priority.number.s.
-## 1                         CANDAT0093181F 00000000
-## 2                          KR20010069326 20011105
-## 3  US19990267981 19990312; CA20002363329 20000310
-## 4                          EP20000122736 20001018
-## 5  US19970968900 19971106; US19950496894 19950630
-## 6 IT2000TO00900 20000928; IT2001TO00008U 20010119
-##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Patents.cited.in.the.search.report
-## 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-## 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-## 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-## 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        US3879564 (A); US4164591 (A); US4919477 (A); US5256432 (A)
-## 5 US628449 (A); US969173 (A); US1174826 (A); US1179294 (A); US1646921 (A); US2089396 (A); US2509035 (A); US2668767 (A); US3143424 (A); US3235390 (A); US3677769 (A); US3845219 (A); US3880069 (A); US4020184 (A); US4205091 (A); US4283424 (A); US4283431 (A); US4308286 (A); US4313961 (A); US4416910 (A); US4463020 (A); US4551337 (A); US4574090 (A); US4626188 (A); US4645673 (A); US4661361 (A); US4696823 (A); US4753813 (A); US4842882 (A); US4907501 (A); US5104669 (A); US5180603 (A); US5182123 (A); US5194273 (A); US5196223 (A); US5268188 (A); US5348751 (A); US5405626 (A); US5417150 (A); US5417996 (A); US5529799 (A); US5560946 (A); DE3704192 (A1); GB2241863 (A)
-## 6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               US3026209 (A); US3515331 (A); US4197940 (A); US4441626 (A); US4883195 (A); US5052559 (A); US5385292 (A); US5445286 (A); US5482724 (A); US5588587 (A); US5895698 (A); EP0989067 (A1)
-##   Literature.cited.in.the.search.report Patents.cited.during.examination
-## 1                                                                       
-## 2                                                                       
-## 3                                                                       
-## 4                                                                       
-## 5                                                                       
-## 6                                                                       
-##   Literature.cited.during.examination Other.patent.citations
-## 1                                  NA                     NA
-## 2                                  NA                     NA
-## 3                                  NA                     NA
-## 4                                  NA                     NA
-## 5                                  NA                     NA
-## 6                                  NA                     NA
-##   Other.literature.citations Patents.used.in.opposition
-## 1                         NA                       <NA>
-## 2                         NA                       <NA>
-## 3                         NA                       <NA>
-## 4                         NA                       <NA>
-## 5                         NA                       <NA>
-## 6                         NA                       <NA>
-##   Literature.used.in.opposition
-## 1                            NA
-## 2                            NA
-## 3                            NA
-## 4                            NA
-## 5                            NA
-## 6                            NA
-##                  Patents.cited.by.the.applicant
-## 1                                              
-## 2                                              
-## 3                                              
-## 4 US4361227 (A); US4791861 (A); JPH09299017 (A)
-## 5                                              
-## 6                                              
-##   Literature.cited.by.the.applicant International.search.citation
-## 1                                NA                              
-## 2                                NA                              
-## 3                                NA                              
-## 4                                NA                              
-## 5                                NA                              
-## 6                                NA                              
-##   International.search.NPL.citation
-## 1                                  
-## 2                                  
-## 3                                  
-## 4                                  
-## 5                                  
-## 6                                  
-##   Supplementary.international.search.citation
-## 1                                          NA
-## 2                                          NA
-## 3                                          NA
-## 4                                          NA
-## 5                                          NA
-## 6                                          NA
-##   Supplementary.international.search.NPL.citation
-## 1                                              NA
-## 2                                              NA
-## 3                                              NA
-## 4                                              NA
-## 5                                              NA
-## 6                                              NA
+## Error in head(pizzasliced2): object 'pizzasliced2' not found
 {% endhighlight %}
 
 We could also take a look at the bottom of the dataset
@@ -499,90 +382,7 @@ summary(pizzasliced2)
 
 
 {% highlight text %}
-##     Title           Publication.number Publication.date  
-##  Length:1707        Length:1707        Length:1707       
-##  Class :character   Class :character   Class :character  
-##  Mode  :character   Mode  :character   Mode  :character  
-##                                                          
-##                                                          
-##                                                          
-##  Inventor.s.        Applicant.s.       International.classification
-##  Length:1707        Length:1707        Length:1707                 
-##  Class :character   Class :character   Class :character            
-##  Mode  :character   Mode  :character   Mode  :character            
-##                                                                    
-##                                                                    
-##                                                                    
-##  Cooperative.Patent.Classification Application.number Date.of.application
-##  Length:1707                       Length:1707        Min.   :       0   
-##  Class :character                  Class :character   1st Qu.:20020816   
-##  Mode  :character                  Mode  :character   Median :20060413   
-##                                                       Mean   :20046941   
-##                                                       3rd Qu.:20100407   
-##                                                       Max.   :20140724   
-##  Priority.number.s. Patents.cited.in.the.search.report
-##  Length:1707        Length:1707                       
-##  Class :character   Class :character                  
-##  Mode  :character   Mode  :character                  
-##                                                       
-##                                                       
-##                                                       
-##  Literature.cited.in.the.search.report Patents.cited.during.examination
-##  Length:1707                           Length:1707                     
-##  Class :character                      Class :character                
-##  Mode  :character                      Mode  :character                
-##                                                                        
-##                                                                        
-##                                                                        
-##  Literature.cited.during.examination Other.patent.citations
-##  Mode:logical                        Mode:logical          
-##  NA's:1707                           NA's:1707             
-##                                                            
-##                                                            
-##                                                            
-##                                                            
-##  Other.literature.citations Patents.used.in.opposition
-##  Mode:logical               Length:1707               
-##  NA's:1707                  Class :character          
-##                             Mode  :character          
-##                                                       
-##                                                       
-##                                                       
-##  Literature.used.in.opposition Patents.cited.by.the.applicant
-##  Mode:logical                  Length:1707                   
-##  NA's:1707                     Class :character              
-##                                Mode  :character              
-##                                                              
-##                                                              
-##                                                              
-##  Literature.cited.by.the.applicant International.search.citation
-##  Mode:logical                      Length:1707                  
-##  NA's:1707                         Class :character             
-##                                    Mode  :character             
-##                                                                 
-##                                                                 
-##                                                                 
-##  International.search.NPL.citation
-##  Length:1707                      
-##  Class :character                 
-##  Mode  :character                 
-##                                   
-##                                   
-##                                   
-##  Supplementary.international.search.citation
-##  Mode:logical                               
-##  NA's:1707                                  
-##                                             
-##                                             
-##                                             
-##                                             
-##  Supplementary.international.search.NPL.citation
-##  Mode:logical                                   
-##  NA's:1707                                      
-##                                                 
-##                                                 
-##                                                 
-## 
+## Error in summary(pizzasliced2): object 'pizzasliced2' not found
 {% endhighlight %}
 
 
@@ -595,7 +395,13 @@ pizzasliced3 <- tbl_df(pizzasliced2)
 
 
 
-Houston, we have a problem. That problem is that somewhere in the esp@cenet data that makes up the pizza_sliced dataset there is an issue with the character encoding that is preventing the `dplyr` function from working. Typically this will mean that the character encoding has become messed up in the underlying data. This of course is one of the reasons it is always worth checking the data first (as is suggested in this video [here](https://youtu.be/YYaMEbJW7Qw?list=PLsZOGmKUMi54n8R06U1HmxNywt0bAFays)). Clearly that is OK for small datasets but for large or multi-part datasets is a problem. So, another solution is needed. The problem as it turns out is in the inventor and the applicant fields in the space between the name and the country code entry which looks like this in Excel BIANCHI MARCO‰Ûâ[IT] and merely throws a ??? in Open Office Calc. 
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "tbl_df"
+{% endhighlight %}
+
+
+
+Houston, we have a problem. That problem is that somewhere in the esp@cenet data that makes up the pizza_sliced dataset there is an issue with the character encoding that is preventing the `dplyr` function from working. Typically this will mean that the character encoding has become messed up in the underlying data. This of course is one of the reasons it is always worth checking the data first (as is suggested in this video [here](https://youtu.be/YYaMEbJW7Qw?list=PLsZOGmKUMi54n8R06U1HmxNywt0bAFays)). Clearly that is OK for small datasets but for large or multi-part datasets is a problem. So, another solution is needed. The problem as it turns out is in the inventor and the applicant fields in the space between the name and the country code entry which looks like this in Excel `BIANCHI MARCO‰Ûâ[IT]` and merely throws a `???` in Open Office Calc. 
 
 Working out how to solve this problem in R could take a while (although string replacement is a good bet). The issue therefore is how to get to a solution as quickly as possible. That solution is to take what we learned above to write the new data.frame to a .csv file, then open the file in Open Office or Excel and use find and replace on the corrupted strings (as is suggested in this video [here](https://youtu.be/YYaMEbJW7Qw?list=PLsZOGmKUMi54n8R06U1HmxNywt0bAFays)). 
 
@@ -604,6 +410,12 @@ First check your working directory `getwd()` so you know where the file will go.
 
 {% highlight r %}
 write.csv(pizzasliced2, "pizzasliced2.csv", row.names = FALSE)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in is.data.frame(x): object 'pizzasliced2' not found
 {% endhighlight %}
 
 Open the file in either Open Office or Excel. Copy the corrupted characters in the Inventors or Applicants columns, select those columns and then find and replace with a space as the replacement (see the video link above). Then save the file writing over the original download. Now let's reimport it. 
@@ -760,6 +572,12 @@ The inventors and applicant fields are now free of the encoding problem. We are 
 pizzasliced4 <- tbl_df(pizzasliced3)
 {% endhighlight %}
 
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "tbl_df"
+{% endhighlight %}
+
 Let's print pizzasliced4. 
 
 
@@ -770,34 +588,7 @@ pizzasliced4
 
 
 {% highlight text %}
-## Source: local data frame [1,707 x 24]
-## 
-##                                                                          Title
-## 1                                                                   PIZZA TRAY
-## 2                                      COOKING METHOD OF GREEN-TEA ADDED PIZZA
-## 3                                                   METHOD FOR COOKING A PIZZA
-## 4                               Pizza preparation and delivery method and unit
-## 5                                       Method of making laminated pizza crust
-## 6      Container for transporting heated food, particularly pizza and the like
-## 7  Method of configuring a slice of a pizza-type pie and an apparatus for prep
-## 8                                                     Box games and activities
-## 9  Method and user interface for specifying toppings and their placement on a 
-## 10                                      Machine for flattening pastry or dough
-## ..                                                                         ...
-## Variables not shown: Publication.number (chr), Publication.date (chr),
-##   Inventor.s. (chr), Applicant.s. (chr), International.classification
-##   (chr), Cooperative.Patent.Classification (chr), Application.number
-##   (chr), Date.of.application (int), Priority.number.s. (chr),
-##   Patents.cited.in.the.search.report (chr),
-##   Literature.cited.in.the.search.report (chr),
-##   Patents.cited.during.examination (chr),
-##   Literature.cited.during.examination (lgl), Other.patent.citations (lgl),
-##   Other.literature.citations (lgl), Patents.used.in.opposition (chr),
-##   Literature.used.in.opposition (lgl), Patents.cited.by.the.applicant
-##   (chr), Literature.cited.by.the.applicant (lgl),
-##   International.search.citation (chr), International.search.NPL.citation
-##   (chr), Supplementary.international.search.citation (lgl),
-##   Supplementary.international.search.NPL.citation (lgl)
+## Error in eval(expr, envir, enclos): object 'pizzasliced4' not found
 {% endhighlight %}
 
 
@@ -813,11 +604,23 @@ View(pizzasliced4)
 {% endhighlight %}
 
 
+
+{% highlight text %}
+## Error in View : object 'pizzasliced4' not found
+{% endhighlight %}
+
+
 Let's finish off here by writing pizzasliced4 back out to a .csv for practice. 
 
 
 {% highlight r %}
 write.csv(pizzasliced4, "pizzasliced4", row.names = FALSE)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in is.data.frame(x): object 'pizzasliced4' not found
 {% endhighlight %}
 
 While we would probably choose more informative filenames it is good practice to output work before moving on to other tasks or at some point it will be lost. 
