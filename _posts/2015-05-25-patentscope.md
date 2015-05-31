@@ -55,12 +55,11 @@ The two excel icons at the end of the menu allow a user to download either the s
 
 ![_config.yml]({{ site.baseurl }} /images/patentscope/pizzaexporting.png)
 
-
 When we download these results we will receive an `.xls` sheet with up to 10,000 entries with a couple of header rows that show the query. Note that each record in the Excel sheet is hyperlinked to the corresponding record in Patentscope. 
 
 ![_config.yml]({{ site.baseurl }} /images/patentscope/results.png) 
 
-We will go into the use of this data, including with Tableau Public and other tools, in some depth and there are a few things to note here. The first is that the hyperlinked publication number does not possess a kind code (A1, B1 etc.) and is actually therefore an application number. This only matters in the sense that the number will retrieve multiple documents in other databases linked to the Patentscope application number. A second point to note is that Patentscope data is `raw` in the sense that it is data as it comes from the data providers and is not processed. That means that there can be encoding issues that we will come back to later on in the discussions on data cleaning. 
+We will go into the use of this data, including with Tableau Public and other tools, in some depth and there are a few things to note here. The first is that the hyperlinked publication number does not possess a kind code (A1, B1 etc.). This only matters in the sense that the number will retrieve multiple documents in other databases linked to the Patentscope number. A second point to note is that Patentscope data is `raw` in the sense that it is data as it comes from the data providers and is not processed. That means that there can be encoding issues that we will come back to later on in the discussions on data cleaning. 
 
 What is great about Patentscope is that we can actually obtain quite a significant volume of data on a topic of interest. While this article has simply downloaded the first 10,000 results, to obtain the full result set it would be easy enough to limit the data by year and download the data as a series of sets that can be combined later (e.g. three sets).
 
