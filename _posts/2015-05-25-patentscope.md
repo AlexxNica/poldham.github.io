@@ -3,7 +3,6 @@ layout: post
 title: "Obtaining Patent Data: Patentscope"
 author: "Paul Oldham"
 date: "25 May 2015"
-tags: [open source software, patent analysis, patent analytics, patent survey, WIPO patentscope, patentscope]
 published: true
 ---
 
@@ -19,11 +18,16 @@ In this article we cover the basics of using Patentscope to search for and downl
 6. [Mobile version](https://patentscope.wipo.int/search/mobile/index.jsf) and [https:](http://www.wipo.int/patentscope/en/news/pctdb/2015/news_0002.html) access
 7. [Sequence listing downloads](https://patentscope.wipo.int/search/en/sequences.jsf)
 
-The best approach to obtaining patent data from Patentscope is to register for a free account. If not you will not be able to download the data, or gain access to the sequence download area. To register for a free account go [here](https://patentscope.wipo.int/search/en/reg/registration.jsf)
+Two detailed guides are also available in `.pdf`for using Patentscope: 
+
+1. [Patentscope Search: The User's Guide](http://www.wipo.int/edocs/pubdocs/en/patents/434/wipo_pub_l434_08.pdf).
+2.  Patentscope CLIR for the Cross-Lingual Information Retrieval Tool [here](https://patentscope.wipo.int/search/help/en/CLIR_DOC.pdf).
+
+The best approach to obtaining patent data from Patentscope is to register for a free account. If not you will not be able to download the data, or gain access to the sequence download area. To register for a free account go [here](https://patentscope.wipo.int/search/en/reg/registration.jsf).
 
 ##Collections to Search
 
-Perhaps the best place to start is with the collections we will be searching. Those can be accessed under the Options menu on the main menu and then the tab reading [office](https://patentscope.wipo.int/search/en/reg/registration.jsf)
+Perhaps the best place to start is with the collections we will be searching. Those can be accessed under the Options menu on the main menu and then the tab reading [office](https://patentscope.wipo.int/search/en/reg/registration.jsf).
 
 ![_config.yml]({{ site.baseurl }} /images/patentscope/collections.png)
 
@@ -70,7 +74,7 @@ To go further with this tool use either the slider settings (precision vs. recal
 
 "FP:((EN_TI:("synthetic biology" OR "biologic synthetic") OR EN_AB:("synthetic biology" OR "biologic synthetic")) OR (DE_TI:("synthetische Biologie" OR "synthetischen biologischen" OR "biologische synthetische" OR "Biologische synthetische") OR DE_AB:("synthetische Biologie" OR "synthetischen biologischen" OR "biologische synthetische" OR "Biologische synthetische")) OR (ES_TI:("biológicas sintéticas") OR ES_AB:("biológicas sintéticas")) OR (FR_TI:("biologie synthétique" OR "biologie synthéthique") OR FR_AB:("biologie synthétique" OR "biologie synthéthique")) OR (JA_TI:("生物合成" OR "合成生体" OR "の生物学的合成") OR JA_AB:("生物合成" OR "合成生体" OR "の生物学的合成")) OR (ZH_TI:("合成生物") OR ZH_AB:("合成生物")))"
 
-If supervised mode is selected from the `Expansion mode` drop down, it becomes possible to select technology areas for the generation of terminology. While we haven't worked through this in detail that could be very helpful for domain specific query generation. All in all, this is one of the most original and powerful tools that Patentscope has to offer. 
+If supervised mode is selected from the `Expansion mode` drop down, it becomes possible to select technology areas for the generation of terminology. While we haven't worked through this in detail that could be very helpful for domain specific query generation. All in all, this is one of the most original and powerful tools that Patentscope has to offer. A detailed `.pdf`guide to using CLIR is available [here](https://patentscope.wipo.int/search/help/en/CLIR_DOC.pdf).
 
 ##Sequence Data
 
