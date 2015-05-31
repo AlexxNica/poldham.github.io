@@ -26,11 +26,11 @@ Perhaps the best place to start is with the collections we will be searching. Th
 
 ![_config.yml]({{ site.baseurl }} /images/patentscope/collections.png)
 
-We can see here that there are quite a few collections available for search including all the main offices. If you are only interested in particular collections, this is the place to change the settings. 
+We can see here that Patentscope provides access to the Patent Cooperation Treaty collection, regional collections such as the ARIPO and the European Patent Office and national collections such as the United States, Japan and Others. The ability to search and retrieve data from the LATIPAT collection will be particularly useful for researchers in Latin America and could be linked to analysis using the espacenet version of [LATIPAT](http://lp.espacenet.com). If you are only interested in particular collections, this is the place to change the settings. 
 
 ##Simple Search
 
-We can select a range of different fields for search. In this case I have selected full text from the drop down menu for a simple search on the term pizza.
+We can select a range of different fields for search. In this case we have selected full text from the drop down menu for a simple search on the term pizza.
 
 ![_config.yml]({{ site.baseurl }} /images/patentscope/simplesearch.png)
 
@@ -51,11 +51,11 @@ The two excel icons at the end of the menu allow a user to download either the s
 ![_config.yml]({{ site.baseurl }} /images/patentscope/pizzaexporting.png)
 
 
-When we download these results we will receive an `.xls` sheet with up to 10,000 entries with a couple of header rows that show the query. 
+When we download these results we will receive an `.xls` sheet with up to 10,000 entries with a couple of header rows that show the query. Note that each record in the Excel sheet is hyperlinked to the corresponding record in Patentscope. 
 
 ![_config.yml]({{ site.baseurl }} /images/patentscope/results.png) 
 
-We will go into the use of this data, including with Tableau Public and other tools, in some depth and there are a few things to note here. The first is that the hyperlinked publication number does not possess a kind code (A1, B1 etc.) and is actually therefore an application number. This only matters in the sense that the number will retrieve multiple documents in other databases linked to the Patentscope application number. A second point to note is that Patentscope data is `raw` in the sense that it is data as it comes from the data providers and is not interpreted. That means that there can be encoding issues that we will come back to later on in the discussions on data cleaning. 
+We will go into the use of this data, including with Tableau Public and other tools, in some depth and there are a few things to note here. The first is that the hyperlinked publication number does not possess a kind code (A1, B1 etc.) and is actually therefore an application number. This only matters in the sense that the number will retrieve multiple documents in other databases linked to the Patentscope application number. A second point to note is that Patentscope data is `raw` in the sense that it is data as it comes from the data providers and is not processed. That means that there can be encoding issues that we will come back to later on in the discussions on data cleaning. 
 
 What is great about Patentscope is that we can actually obtain quite a significant volume of data on a topic of interest. While this article has simply downloaded the first 10,000 results, to obtain the full result set it would be easy enough to limit the data by year and download the data as a series of sets that can be combined later (e.g. three sets).
 
@@ -69,7 +69,7 @@ To go further with this tool use either the slider settings (precision vs. recal
 
 "FP:((EN_TI:("synthetic biology" OR "biologic synthetic") OR EN_AB:("synthetic biology" OR "biologic synthetic")) OR (DE_TI:("synthetische Biologie" OR "synthetischen biologischen" OR "biologische synthetische" OR "Biologische synthetische") OR DE_AB:("synthetische Biologie" OR "synthetischen biologischen" OR "biologische synthetische" OR "Biologische synthetische")) OR (ES_TI:("biológicas sintéticas") OR ES_AB:("biológicas sintéticas")) OR (FR_TI:("biologie synthétique" OR "biologie synthéthique") OR FR_AB:("biologie synthétique" OR "biologie synthéthique")) OR (JA_TI:("生物合成" OR "合成生体" OR "の生物学的合成") OR JA_AB:("生物合成" OR "合成生体" OR "の生物学的合成")) OR (ZH_TI:("合成生物") OR ZH_AB:("合成生物")))"
 
-If supervised mode is selected from the `Expansion mode` drop down, it becomes possible to select technology areas for the generation of terminology. While I haven't worked through this in detail that could be very helpful for domain specific query generation. All in all, this is one of the most original and powerful tools that Patentscope has to offer. 
+If supervised mode is selected from the `Expansion mode` drop down, it becomes possible to select technology areas for the generation of terminology. While we haven't worked through this in detail that could be very helpful for domain specific query generation. All in all, this is one of the most original and powerful tools that Patentscope has to offer. 
 
 ##Sequence Data
 
@@ -85,24 +85,24 @@ Registered account holders can also use the `ftp anonymous download` service fro
 
 ![_config.yml]({{ site.baseurl }} /images/patentscope/sequenceftp.png)
 
-If using the anonymous ftp service note that the recent data is measured in gigabytes, so not for download over a weak WIFI connection or a gated connetion. Nevertheless, the open accessibility of this data is important. For other sequence data sources you may be interested in the European Bioinformatics Institute resources [here](http://www.ebi.ac.uk/patentdata) and for the US by document number [here](http://seqdata.uspto.gov/) and until March 2015 at the DNA Patent Database [here](https://dnapatents.georgetown.edu/). Also important is the Patseq tool [here](https://www.lens.org/lens/bio/sequence). 
+If using the anonymous ftp service note that the recent data is measured in gigabytes, so not for download over a weak WIFI connection or a gated connection. Nevertheless, the open accessibility of this data is important. For other sequence data sources you may be interested in the European Bioinformatics Institute resources [here](http://www.ebi.ac.uk/patentdata) and for the US by document number [here](http://seqdata.uspto.gov/) and until March 2015 at the DNA Patent Database [here](https://dnapatents.georgetown.edu/). Also important is the Patseq tool [here](https://www.lens.org/lens/bio/sequence). 
 
 ##Round Up
 
-WIPO Patentscope is a powerful tool for gaining access to a significant amount of patent data on a topic of interest. The ability to download 10,000 records cannot be beaten by other free tools. The `Cross Lingual Searching` tool is, in my view, excellent. Free access to bulk download of sequence data is likely to keep bioinformaticians happy for quite a long time. 
+WIPO Patentscope is a powerful tool for gaining access to a significant amount of patent data on a topic of interest. The ability to download 10,000 records cannot be beaten by other free tools. The `Cross Lingual Searching` tool appears to be unique and valuable. Free access to bulk download of sequence data is likely to keep bioinformaticians happy for quite a long time. 
 
-Where I would suggest using Patentscope in patent analytics is in combiniation with other tools. For example, it should be possible to use the application numbers (publication numbers) to retrieve data that is of interest from EPO Open Patent Services in either R or Python. The `Cross Lingual Searching` tool should be particularly useful for trying to identify and later acquire patent documents from other jurisdictions where a company or organisation may be seeking to operate or to expand patent landscape analysis into jurisdictions with non-Roman alphabets. 
+One way of thinking about the role of Patentscope in patent analytics is as a resource that can be combined with other data tools. For example, if we wanted to obtain the abstracts, descriptions or claims of PCT documents in Patentscope then we might use the Patenscope numbers to retrieve data from EPO Open Patent Services or Google Patents using R or Python or other tools. That is, in this case Patentscope overcomes the limitations of search results from other tools but allows for the targeted use of other tools to retrieve more information. The `Cross Lingual Searching` tool could also be particularly useful for trying to identify and later acquire patent documents from other jurisdictions where a company or organisation may be seeking to operate or to expand patent landscape analysis into jurisdictions with non-Roman alphabets. 
 
-The main difficulties that arise from Patentscope data is its raw nature, although this could also be considered a strength. That is, what is available for download is the raw unadulterated data as provided by WIPO and other patent data providers. For patent analysts that signifies encoding problems, extraneous white space, wrestling with constructing priority numbers and a need for extensive cleaning before analysis. Nevertheless, as we will see, it is possible to do a lot with Patentscope data. 
+The main difficulties that arise from Patentscope data is its raw nature, although this could also be considered a strength. That is, what is available for download is the raw unadulterated data as provided to WIPO by other patent data providers. For patent analysts that signifies encoding problems, extraneous white space, wrestling with constructing priority numbers and a need for extensive cleaning before analysis. Nevertheless, no other free database tool allows us to download as much data in table form for analysis. As we will see, it is possible to do a lot with Patentscope data. 
 
 ###Learn More
 
 - Visit the [Github project page](http://poldham.github.io/)
 - Access materials in the repository directly and add your own [here](https://github.com/poldham/opensource-patent-analytics)
 
-
-
-- Paul Oldham
-- Revised: -
+###Details
+- Author: Paul Oldham
+- Revised: 31/05/2015
 - Written in Rmarkdown with RStudio v.0.99.
+- WIPO Open Source Patent Analytics Manual
 
