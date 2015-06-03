@@ -68,9 +68,7 @@ Hovering over an item inside the facet window brings up a small `edit` button th
 
 ###4. Custom Facets
 
-The Facet menu below brings up a custom menu that allows for the use of code in [Open Refine Expression Language (GREL)](https://github.com/OpenRefine/OpenRefine/wiki/GREL-Functions) to perform tasks not covered by the main menu items. This language is quite simple and can range from short snippets for finding and replacing text to more complex functions that can be reused in future.  
-
-***REPLACE***
+The Facet menu below brings up a custom menu with a range of options. Selecting `Custom text facet` (see below) brings up a pop up that allows for the use of code in [Open Refine Expression Language (GREL)](https://github.com/OpenRefine/OpenRefine/wiki/GREL-Functions) to perform tasks not covered by the main menu items. This language is quite simple and can range from short snippets for finding and replacing text to more complex functions that can be reused in future. We will demonstrate the use of this function below.   
 
 ![_config.yml]({{ site.baseurl }} /images/openrefine/facet_menu.png)
 
@@ -82,7 +80,7 @@ There are two options for reordering columns. The first is to select the column 
 
 ###6. Undo and Redo
 
-Open Refine keeps track of each action and allows you to go back several steps or to the beginning. This is particularly helpful when testing whether a particular approach to cleaning (e.g. splitting columns or using a snippet of code) will meet your needs. In particular it means you can explore and test approaches while not worrying about losing your previous work. 
+Open Refine keeps track of each action and allows you to go back several steps or to the beginning. This is particularly helpful when testing whether a particular approach to cleaning (e.g. splitting columns or using a snippet of code) will meet your needs. In particular it means you can explore and test approaches while not worrying about losing your previous work.
 
 ![_config.yml]({{ site.baseurl }} /images/openrefine/undo_redo.png)
 
@@ -107,7 +105,7 @@ When working with Open Refine we will typically be working on one column at a ti
 2. Open and save a text file as a `code book` to write down the steps taken in cleaning the data (e.g. pizza_codebook.txt). 
 3. Regularise characters (e.g. title, lowercase, uppercase).
 4. Remove leading and trailing whitespace.
-5. Address encoding problems.
+5. Address encoding and related problems.
 
 Additional actions:
 
@@ -154,7 +152,43 @@ We can then rename these columns using the edit `Edit Column > Rename this colum
 
 ![_config.yml]({{ site.baseurl }} /images/openrefine/rename_column.png)
 
-###5. Reformatting dates
+###5. Address Encoding and related problems
+
+The [Recipes](https://github.com/OpenRefine/OpenRefine/wiki/Recipes) section of the documentation provides helpful tips and example code for dealing with encoding and related problems that are reproduced here:
+
+1. corrupted characters. This arises from aggregation of data from different sources. In Patentscope the data is converted to UTF8. However, if problems are encountered select `Edit cells > Transform` and try entering the following
+
+```{r eval=FALSE}
+value.reinterpret("utf-8")
+```
+
+It may be necessary to explore and test other sets which can be identified [here](http://java.sun.com/j2se/1.5.0/docs/guide/intl/encoding.doc.html)
+
+2. Escape html/XML characters e.g. &amp
+
+The most likely source of patent data is XML but to be on the safe side the following should escape (remove) html and XML code appearing in the text. 
+
+```{r eval=FALSE}
+value.unescape("html").unescape("xml")
+```
+
+3. Question marks
+
+Question marks often show up for characters that cannot be represented and effectively displays encoding problems. In addition non-breaking spaces may be represented as &nbsp (Unicode(16)). To find a Unicode value go to `Edit cells > Transform` and then enter unicode(value) which will transform all the characters to unicode numbers. From there you can look up the problem.  
+
+A quick fix is proposed that may work in some circumstances
+
+```{r}
+split(escape(value,'xml'),"&#160;")[0]
+```
+
+Within this particular dataset, we found that these quick tips did not work (presumably because the text had already been converted to UTF-8). However, if all else fails an alternative is to simply find and replace in Transform as in the example below. 
+
+![_config.yml]({{ site.baseurl }} /images/openrefine/replace_encoding.png)
+
+We might note that this is not a very satisfactory solution because it requires inspection of the dataset to identify the specific character problems and then replacing the value. That will be time consuming. 
+
+###6. Reformatting dates
 
 One problem we may encounter is that the standard date definition on patent documents (e.g. 21.08.2009) may not be recognised as a date field in our analysis software because dates can be ambiguous from the perspective of software code. For example, how should 08/12/2009 or 12/08/2009 be interpreted? Alternatively, as in this case, the decimal points may not be correctly interpreted as signifying a date in some software (e.g. R). We might anticipate this and transform the data into a more recognisable form such as 21/08/2009. A very simple way to do this is by using a replace function. In this case we select the menu for the publication_date field and then `Edit cells > Transform`. 
 
@@ -174,9 +208,9 @@ To find other simple codes visit the [Open Refine Recipes page](https://github.c
 
 We will now focus on extracting information from some of the columns before saving the dataset and moving on. 
 
-##Extracting the Publication Country
+###7. Access additional information: Extract the Publication Country
 
-The Patentscope data does not contain a publication country field. Note here that Patentscope merges all publications for an application record into one dossier. So we are only seeing one document of a set of documents (in Patentscope the wider dossier is accessible through the Documents section of the website). However, we could access this information from the front of the publication number in the Patentscope records using a very simple code and create a new column (as above) based on the values returned as below.
+There are a range of pieces of information that are hidden in data inside columns. For example, Patentscope data does not contain a publication country field. In particular, note that Patentscope merges all publications for an application record into one dossier. So we are only seeing one record for a set of documents (in Patentscope the wider dossier for a record is accessible through the Documents section of the website). This is very helpful in reducing duplication but it is important to bear in mind that we are not seeing the wider family in our data table. However, we can work with the information at the front of the publication number in the Patentscope records using a very simple code and create a new column (as above) based on the values returned as below.
 
 ![_config.yml]({{ site.baseurl }} /images/openrefine/publication_country.png)
 
@@ -347,5 +381,7 @@ The [Open Refine website](http://openrefine.org) has links to lots of useful res
 [Open Refine Wiki Recipes](https://github.com/OpenRefine/OpenRefine/wiki/Recipes)
 
 [Open Refine Tips and Tricks](http://googlerefine.blogspot.co.uk)
+
+[Stack Overflow questions on Open Refine](http://stackoverflow.com/questions/tagged/openrefine)
 
 
