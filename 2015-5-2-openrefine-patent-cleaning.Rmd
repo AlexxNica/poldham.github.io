@@ -178,7 +178,7 @@ Question marks often show up for characters that cannot be represented and effec
 
 A quick fix is proposed that may work in some circumstances
 
-```{r}
+```{r eval=FALSE}
 split(escape(value,'xml'),"&#160;")[0]
 ```
 

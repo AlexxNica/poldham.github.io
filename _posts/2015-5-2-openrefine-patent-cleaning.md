@@ -185,12 +185,6 @@ A quick fix is proposed that may work in some circumstances
 split(escape(value,'xml'),"&#160;")[0]
 {% endhighlight %}
 
-
-
-{% highlight text %}
-## Error in split(escape(value, "xml"), "&#160;"): could not find function "escape"
-{% endhighlight %}
-
 Within this particular dataset, we found that these quick tips did not work (presumably because the text had already been converted to UTF-8). However, if all else fails an alternative is to simply find and replace in Transform as in the example below. 
 
 ![_config.yml]({{ site.baseurl }} /images/openrefine/replace_encoding.png)
