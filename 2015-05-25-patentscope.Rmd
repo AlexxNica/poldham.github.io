@@ -10,18 +10,21 @@ published: true
 
 In this article we cover the basics of using Patentscope to search for and download up to 10,000 records. A detailed [User's Guide](http://www.wipo.int/edocs/pubdocs/en/patents/434/wipo_pub_l434_08.pdf) provides more details on specific features. When compared with other free services Patentscope has the following main strengths. 
 
-1. Full text access to PCT applications on the day of publication.
+1. Full text search in the description and claims of PCT applications on the day of publication and patent applications from a range of other countries including the United States, Japan, China and the European Patent Office among others. 
 2. Download up to 10,000 records
 3. Expand search terms into multiple other languages using `Cross Lingual Expansion` or [CLIR](https://patentscope.wipo.int/search/en/clir/clir.jsf?new=true)
 4. Simple, Advanced and Combined Field searching 
 5. Accessible in multiple languages and a [WIPO Translate](https://www3.wipo.int/patentscope/translate/translate.jsf?interfaceLanguage=en) text function
 6. [Mobile version](https://patentscope.wipo.int/search/mobile/index.jsf) and [https:](http://www.wipo.int/patentscope/en/news/pctdb/2015/news_0002.html) access
 7. [Sequence listing downloads](https://patentscope.wipo.int/search/en/sequences.jsf)
+8. Green technologies through the [IPC Green Inventory](http://www.wipo.int/classifications/ipc/en/est/)
+9. Different types of graphical analysis on results lists on the fly using the Options menu. 
 
-Two detailed guides are also available in `.pdf`for using Patentscope: 
+Two detailed guides are also available for using Patentscope and a series of videos have also been released: 
 
 1. [Patentscope Search: The User's Guide](http://www.wipo.int/edocs/pubdocs/en/patents/434/wipo_pub_l434_08.pdf).
 2.  Patentscope CLIR for the Cross-Lingual Information Retrieval Tool [here](https://patentscope.wipo.int/search/help/en/CLIR_DOC.pdf).
+3. [Patentscope video tutorials](https://patentscope.wipo.int/search/en/tutorial.jsf)
 
 The best approach to obtaining patent data from Patentscope is to register for a free account. If not you will not be able to download the data, or gain access to the sequence download area. To register for a free account go [here](https://patentscope.wipo.int/search/en/reg/registration.jsf).
 
@@ -39,15 +42,21 @@ We can select a range of different fields for search. In this case we have selec
 
 ![_config.yml]({{ site.baseurl }} /images/patentscope/simplesearch.png)
 
+Note that Patentscope groups documents for the same application into a record or dossier and that we are seeing the document that is the key for the record. The other documents in the dossier for the record can be accessed by clicking the document number and selecting the Documents menu as in this [example](https://patentscope.wipo.int/search/en/detail.jsf?docId=WO2014047700&recNum=2&tab=PCTDocuments&maxRec=25177&office=&prevFilter=&sortOption=Relevance&queryString=ALLTXT%3A%28pizza%29). 
+
+For more details on using simple search see the `Simple Search` [video tutorial](https://patentscope.wipo.int/search/en/tutorial.jsf). Videos are also available on the use of Field Combinations for constructing searches and Advanced Search.
+
 ##Results
 
 When we arrive at the results page we can see that we have 24,614 results with our query displaying as searching `AllTXT` and all languages. We then have an RSS button to copy the feed over to an RSS feeder for updates. 
 
 ![_config.yml]({{ site.baseurl }} /images/patentscope/patentscopsesimple_pizza.png)
 
-There is also a query tree button that seems to display results by language and terms in the relevant sections of the document. We can see an example of this for a more complex query below.
+There is also a query tree button that displays results by language and terms in the relevant sections of the document. We can see an example of this for a more complex query below.
 
 ![_config.yml]({{ site.baseurl }} /images/patentscope/query_tree.png)
+
+A video tutorial is also available for the [Search result list](https://patentscope.wipo.int/search/en/tutorial.jsf)
 
 ##Downloading the Results
 
@@ -61,7 +70,7 @@ When we download these results we will receive an `.xls` sheet with up to 10,000
 
 We will go into the use of this data, including with Tableau Public and other tools, in some depth and there are a few things to note here. The first is that the hyperlinked publication number does not possess a kind code (A1, B1 etc.). This only matters in the sense that the number will retrieve multiple documents in other databases linked to the Patentscope number. A second point to note is that Patentscope data is `raw` in the sense that it is data as it comes from the data providers and is not processed. That means that there can be encoding issues that we will come back to later on in the discussions on data cleaning. 
 
-What is great about Patentscope is that we can actually obtain quite a significant volume of data on a topic of interest. While this article has simply downloaded the first 10,000 results, to obtain the full result set it would be easy enough to limit the data by year and download the data as a series of sets that can be combined later (e.g. three sets).
+What is very useful about Patentscope is that we can actually obtain quite a significant volume of data on a topic of interest. While this article has simply downloaded the first 10,000 results, to obtain the full result set it would be easy enough to limit the data by year and download the data as a series of sets that can be combined later (e.g. three sets).
 
 ##Cross Lingual Searching
 
@@ -97,7 +106,7 @@ WIPO Patentscope is a powerful tool for gaining access to a significant amount o
 
 One way of thinking about the role of Patentscope in patent analytics is as a resource that can be combined with other data tools. For example, if we wanted to obtain the abstracts, descriptions or claims of PCT documents in Patentscope then we might use the Patenscope numbers to retrieve data from EPO Open Patent Services or Google Patents using R or Python or other tools. That is, in this case Patentscope overcomes the limitations of search results from other tools but allows for the targeted use of other tools to retrieve more information. The `Cross Lingual Searching` tool could also be particularly useful for trying to identify and later acquire patent documents from other jurisdictions where a company or organisation may be seeking to operate or to expand patent landscape analysis into jurisdictions with non-Roman alphabets. 
 
-The main difficulties that arise from Patentscope data is its raw nature, although this could also be considered a strength. That is, what is available for download is the raw unadulterated data as provided to WIPO by other patent data providers. For patent analysts that signifies encoding problems, extraneous white space, wrestling with constructing priority numbers and a need for extensive cleaning before analysis. Nevertheless, no other free database tool allows us to download as much data in table form for analysis. As we will see, it is possible to do a lot with Patentscope data. 
+The main difficulties that arise from using Patentscope can stem from occasional noise in the data. Patenscope does not clean the data provided from the individual collections with the exception of checking for typological errors in priority numbers and IPC codes. In addition, all text is transformed into UTF-8. However, as is common when dealing with diverse data sources, the results are not always perfect. In addition, because Patentscope data is drawn from a wide range of languages users may need to update their font libraries if large numbers of unusual characters appear in the data (such as installing the Asian language pack for Windows). In practice, as is common with most patent data sources, this can mean significant time is required to clean up the data. Having said this, no other free database tool allows us to download as much data in table form for analysis. As we will see, it is possible to do a lot with Patentscope data. 
 
 ###Learn More
 
@@ -106,7 +115,7 @@ The main difficulties that arise from Patentscope data is its raw nature, althou
 
 ###Details
 - Author: Paul Oldham
-- Revised: 31/05/2015
+- Revised: 03/06/2015
 - Written in Rmarkdown with RStudio v.0.99.
 - WIPO Open Source Patent Analytics Manual
 
