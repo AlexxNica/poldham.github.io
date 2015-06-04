@@ -146,6 +146,9 @@ Next follow the same procedure for ranking applicants with inventors using the `
 
 Using `Inventors All` you should now see the following ranked list of inventors. 
 
+![_config.yml]({{ site.baseurl }} /images/tableau/inventors_ranked.png)
+
+
 Now repeat this exercise for the remaining data sources by first creating a sheet and then selecting the data source. As you move through this select the following dimensions to add to the sheet and then drop number of 
 
 1. applicants_ipc. Drop `Ipc Subclass Detail` onto the sheet. Then drop number of records onto the sheet where the field says Abc. Note that a number `6` will appear in the first row. This is an artifact from the separation process. Select that cell, right click and then choose `Exclude`. 
@@ -170,6 +173,7 @@ Let's get a quick overview of the data so far. Next to the add worksheet button 
 Dashboards are perhaps Tableau's best known feature and are rightly very popular. We can fill our dashboard by dragging the worksheets from the `Dashboard` side menu. The order in which we do this can make life easier or more difficult to adjust later. Let's do it in the following steps
 
 1. Drag `Trends` onto the dashboard and it will now fill the view. 
+2. Drag `Organisations` onto the dashboard.
 
 ![_config.yml]({{ site.baseurl }} /images/tableau/dashboard1.png)
 
@@ -182,12 +186,11 @@ Now select the top of the organisations box and a small inverted triangle will a
 The bars may now disappear. Click into the box on the line where the bars start and drag them back into view. At this point long names may start to be obscured. If desired, right click on a long name such as `Graphic Packaging International`, choose `Edit alias` and edit it down to something sensible such as `Graphic Packaging Int`.
 
 We now have two panels on the dashboard. Let's add two more. First drag technology areas below the line where Trends and Organisations finish. Grey shaded boxes will appear that show the placement, across the width is fine. This can take some time to get right, when the whole of the bottom area is highlighted let go of the mouse. If it goes somewhere strange either select the box and in the top right press `x` to remove it, or try moving it (in our experience it is often easier to remove it and try again). 
-
 Do not try to format this box yet. Instead, grab inventors and drag it into the space before the technology areas below. 
 
 We now have four panels in the dashboard but they need some tidying up. First, in the two boxes we have just edited repeat the `Fit Width` exercise and then drag the line for the bars around until they are in view and satisfactory. Next, we have names such as `Applicants Orgs All` that are our internal reference names. Click on them in each of the three panels one at a time and select `Hide Field Labels for Rows`.
 
-Hmm... our Technology Areas panel is proving troublesome because even the edited version is rather long. 
+Hmm... our Technology Areas panel is proving troublesome because even the edited version of the IPC is rather long.
 
 Before we do any editing, first experiment with the `Size` menu in the bottom right. The default dashboard size in Tableau Public is actually quite small. Change the settings until you have something that looks cleaner even if there are still some overlaps. Options such as `Desktop`, `Laptop` and `Large blog` are generally decent sizes but in part the decision depends on where you believe it will be displayed.
 
@@ -203,7 +206,7 @@ We have now done quite a lot of work and produced an Overview dashboard. It is t
 
 The only option for saving a Tableau Public workbook is to save it online. To save the file go to `File` and Save to Tableau Public. If you want to save the workbook as a new file (after previously saving) then choose Save As. 
 
-![_config.yml]({{ site.baseurl }} /images/tableau/dashboard_completed.png)
+![_config.yml]({{ site.baseurl }} /images/tableau/save_public.png)
 
 You will then be asked to enter your username and password (Tableau does not remember the password) and the file will upload. Tableau will then compress the data. As of June 2015 it is possible to store 10GB of data overall and to have up to 10 million rows in a workbook (which is generally more than enough). 
 
@@ -216,21 +219,20 @@ Having read the message, click `Got it` on the right. Do you notice anything str
 ![_config.yml]({{ site.baseurl }} /images/tableau/profile_viewtabs3.png)
 
 To make sure the worksheets are visible select the check box marked `Show workbook sheets as tabs` and then `Save`. 
-
 ![_config.yml]({{ site.baseurl }} /images/tableau/profile_dashtabs.png)
 
 To access this demonstration workbook go [here](https://public.tableau.com/profile/wipo.open.source.patent.analytics.manual#!/vizhome/pizzapatents/Overview).
 
-###Security
+###Privacy and Security
 
-As emphasised above, Tableau Public is by definition a place for publicly sharing workbooks and visualisations. It is not for sensitive data. In the past users, such as journalists, relied on what might be called 'security by obscurity' but the trend towards storing data on a Tableau public profile (the only option) makes that less of an option. It this a concern there are two actions that might potentially be considered that limit the visibility of a workbook and its wider use. 
+As emphasised above, Tableau Public is by definition a place for publicly sharing workbooks and visualisations. It is not for sensitive data. In the past users, such as journalists, relied on what might be called 'security by obscurity' but the trend towards storing data on a Tableau public profile (the only option) makes that less of an option. If this a concern there are two actions that might potentially be considered that limit the visibility of a workbook and its wider use. Logically, the answer to any concerns about Tableau Public and sensitive information is ***not to include sensitive information in the first place***. The following are not recommendations but simply highlight the available options. 
 
-1. In the discussion on the settings above, there is a check box to prevent users from downloading a workbook. You might want to select that option where a workbook contains information that you do not want to be seen other than what you choose to make visible (the best solution of course is ***not to include that information in the first place***). 
+1. In the discussion on the settings above, there is a check box to prevent users from downloading a workbook. You might want to select that option where a workbook contains information that you do not want to be seen other than what you choose to make visible. 
 2. It is possible to create a setting so that a workbook does not show up on a user's profile. This is hard to spot, and appears by hovering over the workbook in the Profile view. 
 
 ![_config.yml]({{ site.baseurl }} /images/tableau/profile_visibility.png)
 
-As the message points out using this option does not prevent a workbook being found through search engines or seen. It just makes it more difficult to see.
+As the message points out using this option does not prevent a workbook being found through search engines or seen by users. It just means it is not visible on the profile page.
 
 As such, Tableau public is fundamentally about sharing information with others through visualisation. That is, it is for information that you want others to see. Here it is briefly worth returning to the completed dashboard above and clicking the share button. 
 
@@ -244,12 +246,12 @@ In this article we have introduced the visualisation of patent data using a set 
 
 To take working with Tableau on pizza patents on your own here are some tips. 
 
-1. You already know how to use tableau to create a map of publication countries. 
-2. The pizza source file contains a set of publication numbers. Try creating a visualisation with the publication numbers, looking in the pizza source file for a set of URL and then exploring what can be done with `Worksheet > Action` with that URL.
+1. You already know how to use Tableau to create a map of publication countries. 
+2. The pizza source file contains a set of publication numbers. Try a) creating a visualisation with the publication numbers, b) looking in the pizza source file for a set of URL and then exploring what can be done with `Worksheet > Action` with that URL.
 3. In dashboards consider using one field as a filter for another field (such as applicant and title). What data source or data sources would you need to do that?
 4. What kinds of stories does the pizza data tell us and how might we visualise them using the information provided on applicants and its subset Applicants IPCs?
 
-If you get stuck, and it does take time to become familiar with Tableau's potential, perhaps try exploring this [workbook on synthetic biology](https://public.tableau.com/profile/poldham#!/) and the use of Tableau images in this article [PLOS ONE article](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0034368). Downloading workbooks prepared by others can be a very good way of learning the tips and tricks of tableau visualisation and dashboarding. 
+If you get stuck, and it does take time to become familiar with Tableau's potential, perhaps try exploring this [workbook on synthetic biology](https://public.tableau.com/profile/poldham#!/) and the use of Tableau images in this article [PLOS ONE article](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0034368). As a tip, try clicking on the bars and then the titles to understand Actions. Downloading workbooks prepared by others can be a very good way of learning the tips and tricks of tableau visualisation and dashboarding. 
 
 If you would like to download the pizza workbook it is [here](https://public.tableau.com/profile/wipo.open.source.patent.analytics.manual#!/vizhome/pizzapatents/Overview).
 
