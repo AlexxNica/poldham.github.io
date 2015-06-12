@@ -244,7 +244,7 @@ As we can see here, Tableau generates embed codes for use on websites or for ema
 
 In this article we have introduced the visualisation of patent data using a set of nearly 10,000 patent documents from WIPO Patentscope that mention pizza. As should by now be clear Tableau Public is a very powerful free tool for data visualisation. It requires attention to detail and care in construction but is one of the best free tools that is out there for visualisation and dashboarding. 
 
-To take working with Tableau on pizza patents on your own here are some tips. 
+To take working with Tableau on pizza patents forward on your own here are some tips. 
 
 1. You already know how to use Tableau to create a map of publication countries. 
 2. The pizza source file contains a set of publication numbers. Try a) creating a visualisation with the publication numbers, b) looking in the pizza source file for a set of URL and then exploring what can be done with `Worksheet > Action` with that URL.
