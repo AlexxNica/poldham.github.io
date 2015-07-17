@@ -8,3 +8,5 @@ KnitPost <- function(input, base.url = my.jekyll.site) {
   render_jekyll()
   knit(input, envir = parent.frame())
 }
+
+##Code courtesy of Jerid Francom

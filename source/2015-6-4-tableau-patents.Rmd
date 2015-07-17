@@ -1,9 +1,10 @@
 ---
-layout: post
 title: "Visualising Patent Data in Tableau Public"
 author: "Paul Oldham"
 date: "3 June 2015"
-published: true
+output: html_document
+published: yes
+layout: post
 ---
 In this article we will be analysing and visualising patent data using Tableau Public. 
 
