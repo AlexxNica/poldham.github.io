@@ -70,7 +70,7 @@ library(ggplot2)
 library(ggthemes)
 {% endhighlight %}
 
-You are now good to go. 
+You are now good to go.
 
 ###Loading the Data
 
@@ -210,6 +210,25 @@ pt <- mutate(pt, group = ntile(n, 3),
 pt
 {% endhighlight %}
 
+
+
+{% highlight text %}
+## Source: local data frame [43 x 5]
+## 
+##    pubyear  n group    percent       rank
+## 1     1970  2     1 0.02227668 0.00000000
+## 2     1971  6     1 0.06683003 0.02380952
+## 3     1972 14     1 0.15593673 0.11904762
+## 4     1973  9     1 0.10024504 0.07142857
+## 5     1974  7     1 0.07796837 0.04761905
+## 6     1975 11     1 0.12252172 0.09523810
+## 7     1976 27     1 0.30073513 0.19047619
+## 8     1977 24     1 0.26732012 0.14285714
+## 9     1978 30     1 0.33415014 0.21428571
+## 10    1979 26     1 0.28959679 0.16666667
+## ..     ... ..   ...        ...        ...
+{% endhighlight %}
+
 This neatly demonstrates how easy it is to use mutate to add columns based on different calculations. 
 
 The reason that we are focusing on adding counts to the publication total table is that when graphing later we can use these columns to split and order the graphics. This is particularly helpful because with patent data we normally have widely varying scores that produce crunched graphs. The availability of either buckets or percentages is very helpful for creating ranked bar charts or plots and faceting (trellis graphs). As we often want to see what happens with a graph before deciding how to proceed or drop data it is useful to have a ranking system. We can then filter the data using function at a later stage.
@@ -230,6 +249,30 @@ pc <-
 print(pc)
 {% endhighlight %}
 
+
+
+{% highlight text %}
+## Source: local data frame [16 x 6]
+## 
+##                      pubcountry pubcode    n group     percent       rank
+## 1      United States of America      US 4267     3 47.52728893 1.00000000
+## 2    Patent Co-operation Treaty      WO 1390     3 15.48229004 0.93333333
+## 3                        Canada      CA 1316     3 14.65805302 0.86666667
+## 4        European Patent Office      EP 1184     3 13.18779238 0.80000000
+## 5            Korea, Republic of      KR  308     3  3.43060815 0.73333333
+## 6                         Japan      JP  205     2  2.28335932 0.66666667
+## 7                       Germany      DE   89     2  0.99131210 0.60000000
+## 8                  South Africa      ZA   72     2  0.80196035 0.53333333
+## 9                         China      CN   60     2  0.66830029 0.46666667
+## 10                       Israel      IL   35     2  0.38984184 0.40000000
+## 11                       Mexico      MX   23     1  0.25618178 0.33333333
+## 12                     Portugal      PT   10     1  0.11138338 0.20000000
+## 13           Russian Federation      RU   10     1  0.11138338 0.20000000
+## 14 Eurasian Patent Organization      EA    4     1  0.04455335 0.13333333
+## 15                        Spain      ES    3     1  0.03341501 0.06666667
+## 16                    Singapore      SG    2     1  0.02227668 0.00000000
+{% endhighlight %}
+
 While we will not focus on using pipes in this article, they simplify the writing of code in R and make it clearer. The above code is identical to the code below. However, note that in the code below we have to keep overwriting each time we add an element. Also note that in the code above we only mention our reference table, p1, once at the beginning whereas in the version without pipes or chaining, we have to mention it as the first argument of each function.
 
 
@@ -241,6 +284,30 @@ pc <- count(p1, pubcountry, pubcode, wt = n)
                 rank = percent_rank(n))
    pc <- arrange(pc, desc(n))
    pc
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Source: local data frame [16 x 6]
+## 
+##                      pubcountry pubcode    n group     percent       rank
+## 1      United States of America      US 4267     3 47.52728893 1.00000000
+## 2    Patent Co-operation Treaty      WO 1390     3 15.48229004 0.93333333
+## 3                        Canada      CA 1316     3 14.65805302 0.86666667
+## 4        European Patent Office      EP 1184     3 13.18779238 0.80000000
+## 5            Korea, Republic of      KR  308     3  3.43060815 0.73333333
+## 6                         Japan      JP  205     2  2.28335932 0.66666667
+## 7                       Germany      DE   89     2  0.99131210 0.60000000
+## 8                  South Africa      ZA   72     2  0.80196035 0.53333333
+## 9                         China      CN   60     2  0.66830029 0.46666667
+## 10                       Israel      IL   35     2  0.38984184 0.40000000
+## 11                       Mexico      MX   23     1  0.25618178 0.33333333
+## 12                     Portugal      PT   10     1  0.11138338 0.20000000
+## 13           Russian Federation      RU   10     1  0.11138338 0.20000000
+## 14 Eurasian Patent Organization      EA    4     1  0.04455335 0.13333333
+## 15                        Spain      ES    3     1  0.03341501 0.06666667
+## 16                    Singapore      SG    2     1  0.02227668 0.00000000
 {% endhighlight %}
 
 Note that we have added the function `arrange` and given it the value of `n`. Arrange will sort a table on a column in ascending order by default and descending order using `desc` inside the function as in this case. Use `View(pc)` to take a look. To reverse the order try the code below.
@@ -263,6 +330,25 @@ pcy <- count(p1, pubcountry, pubcode, pubyear, wt = n) %>%
 pcy
 {% endhighlight %}
 
+
+
+{% highlight text %}
+## Source: local data frame [296 x 4]
+## 
+##    pubcountry pubcode pubyear  n
+## 1      Canada      CA    1971  2
+## 2      Canada      CA    1972  4
+## 3      Canada      CA    1974  1
+## 4      Canada      CA    1975  1
+## 5      Canada      CA    1976  1
+## 6      Canada      CA    1977  1
+## 7      Canada      CA    1978  4
+## 8      Canada      CA    1979  8
+## 9      Canada      CA    1980 11
+## 10     Canada      CA    1981 14
+## ..        ...     ...     ... ..
+{% endhighlight %}
+
 We now have a table that sums up the values by country and year. However, we are now presented with a conundrum. We have lost our groups and ranks. We cannot simply repeat what we did before (e.g. ntile) because the data is now split by year and it will not assign correctly. In addition, using other functions is made difficult by the fact our columns are character columns.
 
 One solution to this conundrum is to join the `pcy` and the `pc` tables together using the `join` functions in `dplyr`. We will start by creating a temporary table that we will call `df` and use `select` to drop the columns we don't want, then we will create a new `pcy` using ` left_join` from `dplyr` (see `join`).
@@ -276,7 +362,7 @@ df <- select(pc, pubcode, group)
 
 
 {% highlight text %}
-## Joining by: c("pubcode", "group")
+## Joining by: "pubcode"
 {% endhighlight %}
 
 We now have a publication country by year table where groups are assigned as in the previous table. Note that for a join to be made the table must possess one or more shared columns that serve as a key for the join (in this case the shared key is `pubcode`). It can be a very good idea to retain a field to use as a shared key where you expect to be joining data at a later stage. Also note that this is one solution, it is not necessarily the best or most efficient solution.
@@ -975,7 +1061,7 @@ In the R Graphics Cookbook, Winston Chang adds three observations about coxcomb 
 In this article we have covered two main topics.
 
 1.  How to prepare data for graphing in R using the `dplyr` package.
-2.  How to draw a range of graphs and the issues encountered using ggplot.
+2.  How to draw a range of graphs and the issues encountered using ggplot2.
 
 In this article we have not explored the full potential of visualisation options in ggplot2, such as heat maps and choropleth maps. These topics are regularly covered on sites such as [r-bloggers.com](http://www.r-bloggers.com). However, we have seen that it is possible to construct graphics from the bottom up using simple code and specifying the details we would like to see.
 

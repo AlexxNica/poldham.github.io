@@ -61,7 +61,7 @@ install.packages("ggthemes")
 
 Then make sure the packages have loaded to make them available. Press command and enter at the end of each line below (or, if you are feeling brave, select them all and then click the icon marked Run).
 
-```{r}
+```{r eval=FALSE}
 library(readr)
 library(dplyr)
 library(ggplot2)
@@ -274,7 +274,7 @@ The geometric object is basically the form we want to see the data in plus any a
 
 For a bar graph (histogram) we would specify `t` and `+` for the `geom` for a bar graph. Inside the `geom_bar()` function we can add some additional details.
 
-```{r fig1_gplot2, eval=FALSE, eval=FALSE}
+```{r fig1_gplot2}
 t + geom_bar(colour = "white", fill = "red", binwidth = 1)
 ```
 
@@ -301,7 +301,7 @@ l <- ggplot(pt, aes(pubyear, n, weight = n))
 
 To view this we now specify the geom as line:
 
-```{r fig2_gplot2, eval=FALSE, eval=FALSE}
+```{r fig2_gplot2}
 l + geom_line()
 ```
 
@@ -309,7 +309,7 @@ l + geom_line()
 
 We now have a line graph. Let's imagine that we wanted to change this to a point (scatter plot). 
 
-```{r fig3_gplot2, warning=FALSE, eval=FALSE}
+```{r fig3_gplot2, warning=FALSE}
 l + geom_point()
 ```
 
@@ -317,7 +317,7 @@ l + geom_point()
 
 However, now we would like to have a line and a scatterplot.
 
-```{r fig4_gplot2, warning=FALSE, eval=FALSE}
+```{r fig4_gplot2, warning=FALSE}
 l + geom_point() + geom_line()
 ```
 
@@ -325,7 +325,7 @@ l + geom_point() + geom_line()
 
 This will then draw a line through our scatterplot points. For the sake of illustration we could add another geom to our list to convert to an area graph.
 
-```{r fig5_gplot2, warning=FALSE, eval=FALSE}
+```{r fig5_gplot2, warning=FALSE}
 l + geom_point() + geom_line() + geom_area()
 ```
 
@@ -341,7 +341,7 @@ l1 <- ggplot(pt, aes(pubyear, n, weight = n, fill=""))
 
 We now add layers including the theme. In this case we have chosen `theme_igray` and specified the font as Helvetica, then `scale_fill_tableau` specifying the “tableau20” palette. Because something for `fill` has to be specified in the base object we end up with a legend we don't need. To remove that when applying the theme we add a + `theme(legend.position="none")` to drop the legend.
 
-```{r fig6_gplot2, warning=FALSE, eval=FALSE}
+```{r fig6_gplot2, warning=FALSE}
 l2 <- l1+ geom_area() +
   theme_igray(base_family = "Helvetica") +
   scale_fill_tableau("tableau20") +
@@ -355,7 +355,7 @@ That is very close to the filled graph in our [Tableau Public workbook](https://
 
 For illustration, we could add information that augments our understanding of the data. First, we could add a line. Second, we could add a rug to the plot. A rug adds a line for each of the observations in the data.
 
-```{r fig7_gplot2, warning=FALSE, eval=FALSE}
+```{r fig7_gplot2, warning=FALSE}
 l2 + geom_line() + geom_rug()
 ```
 
@@ -365,7 +365,7 @@ What has happened here is that the addition of geom_rug has added a line to the 
 
 What is clear from this is that we do not need a rug for the year. So, let's change that.
 
-```{r fig8_gplot2, warning=FALSE, eval=FALSE}
+```{r fig8_gplot2, warning=FALSE}
 l2 + geom_rug(sides = "l")
 ```
 
@@ -385,7 +385,7 @@ and adapt this for a line graph using `colour` rather than `fill`.
 
 We will place that in an object called `co` for combined.
 
-```{r fig9_gplot2, warning=FALSE, eval=FALSE}
+```{r fig9_gplot2, warning=FALSE}
 co <- ggplot(pt, aes(pubyear, n, weight = n)) +
   geom_line() +
   geom_line(data = pcy, aes(pubyear, n, weight = n, colour = pubcode))
@@ -406,7 +406,7 @@ What we would like to know here is the trend for pizza patent publications using
 To do that we will work with `co` as follows by changing geom_line() on the pt data to geom_point() for a scatter plot and then adding a `geom_smooth()`. By default `geom_smooth()`
 will draw a grey area indicating the standard error interval (se). That interval is set to 0.95 by default. We can do this quite easily by adding `geom_smooth()` to `co`.
 
-```{r fig10_gplot2, warning=FALSE, eval=FALSE}
+```{r fig10_gplot2, warning=FALSE}
 co + geom_smooth()
 ```
 
@@ -416,7 +416,7 @@ We will now see a message telling us what is happening "geom_smooth: method="aut
 
 If we leave the standard error interval for the trend line on then our graph becomes hard to understand. We can turn it off we can set an argument inside as follows.
 
-```{r fig11_gplot2, warning=FALSE, eval=FALSE}
+```{r fig11_gplot2, warning=FALSE}
 co + geom_smooth(se = FALSE)
 ```
 
@@ -432,7 +432,7 @@ As this suggests there are a range of statistical transformations available in g
 
 To add labels use the function `labs()`. Note that the title= , x = and y = must be specified if you want to include labels. Otherwise R will not know what to do with the information. 
 
-```{r fig12_gplot2, warning=FALSE, eval=FALSE}
+```{r fig12_gplot2, warning=FALSE}
 co + geom_smooth(se = FALSE) + 
   labs(title = "Patentscope Pizza Patents",
           x = "Publication Year",
@@ -462,7 +462,7 @@ ct <- ggplot(pc, aes(pubcode, weight=n, fill=pubcode))
 
 Next we set the geom, in this case for `geom_bar()`. Because the x axis will have country code labels we will remove the legend using `guides(fill=FALSE)`. Note that the legend arises from `fill=pubcode` in the base object. Alternative ways of removing a legend include `scale_fill_discrete(guide = FALSE)` or `theme(legend.position="none")`.
 
-```{r fig13_gplot2, warning=FALSE, eval=FALSE}
+```{r fig13_gplot2, warning=FALSE}
 ct + geom_bar() + guides(fill=FALSE)
 ```
 
@@ -472,7 +472,7 @@ Note here that if we changed `fill = pubcode` in `ct` to `colour = pubcode` then
 
 Following Edward Tufte we could also try a simpler approach. To do that we apply `theme_tufte()` from `ggthemes` and change the font to Helvetica, or something other than the default Serif in this theme, by specifying the `base_family`.
 
-```{r fig14_gplot2, eval=FALSE}
+```{r fig14_gplot2}
 ct1 <- ct + geom_bar() +
   theme_tufte(base_family = "Helvetica") +
   guides(fill=FALSE)
@@ -483,7 +483,7 @@ ct1
 
 This is a nice simple example of removing clutter to focus in on what matters: presenting the data. We can also apply the tableau theme for consistency with our trends plots. In this case we will use `theme(legend.position="none")` to turn off the legend. 
 
-```{r fig15_gplot2, eval=FALSE}
+```{r fig15_gplot2}
 ct2 <- ct + geom_bar() +
   theme_igray() +
   scale_color_tableau("tableau20") +
@@ -499,7 +499,7 @@ A range of other options for controlling fonts and legends with practical demons
 
 We can also add the values to our bars for our new object . We can achieve this using `geom_text`. In this case we needed to specify the y axis again inside `geom_text`. `vjust` specifies the vertical justification with the horizontal being `hjust`. In this case we have also specified the font size in `geom_text()` as 12.
 
-```{r fig16_gplot2, eval=FALSE}
+```{r fig16_gplot2}
 ct2 + geom_text(aes(y = n, label = n, size = 12), vjust= -0.2)
 ```
 
@@ -513,7 +513,7 @@ Depending on the font used you may have to change the `hjust` value or adjust th
 
 ***A Ranked Bar Chart***
 
-```{r fig17_gplot2, eval=FALSE}
+```{r fig17_gplot2}
 ctr <- ggplot(pc, aes(x = reorder(pubcode, n), y = n, fill = pubcode)) + 
   geom_bar(stat = "identity") +
   coord_flip() +
@@ -533,7 +533,7 @@ There is room for improvement here, such as the colour of the country names (or 
 
 For a simple dot plot of the same data we can make three changes. 1. We change fill to colour in the base object. 2. We change `geom_bar` to `geom_point` and specify the size of the dots. 3. For the labelled values we change hjust.
 
-```{r fig18_gplot2, eval=FALSE}
+```{r fig18_gplot2}
 ctd <- ggplot(pc, aes(x = reorder(pubcode, n), y = n, colour = pubcode)) + 
   geom_point(size = 3) +
   coord_flip() +
@@ -553,7 +553,7 @@ Note here that one limitation of this dot plot is the adjustment of `hjust` wher
 
 Another way or representing the data would be as a set of balloons sized on the number of records. 
 
-```{r fig19_gplot2, eval=FALSE}
+```{r fig19_gplot2}
 ctb <- ggplot(pc, aes(x = pubcode, y = n, size = n)) + 
   geom_point(shape = 21, colour = "black", fill = "cornsilk") +
   scale_size_area(max_size = 15) + 
@@ -572,7 +572,7 @@ This is a very basic balloon plot and plots of this type could be readily adapte
 
 To create a stacked bar chart using our `pcy` data we can use the following. We will however rapidly run into some of the aesthetic problems that are common with stacked bar charts. In reading this section, consider whether a stacked bar chart is really the best way to represent the data. 
 
-```{r fig20_gplot2, eval=FALSE}
+```{r fig20_gplot2}
 sb <- ggplot(pcy, aes(pubyear, weight=n, fill=pubcode)) +
   geom_bar(binwidth = 1)
 sb
@@ -592,7 +592,7 @@ sm <- ggplot(main, aes(pubyear, weight=n, fill=pubcode))
 
 We are presently using fill on the pubcode, but what if we specified a colour for the borders of the data.
 
-```{r fig21_gplot2, eval=FALSE}
+```{r fig21_gplot2}
 sm + geom_bar(binwidth = 1, colour = "black")
 ```
 
@@ -608,7 +608,7 @@ main <- arrange(main, pubcode)
 
 A definite improvement but not earth shattering and we now have a filled legend. We can try changing the palette.
 
-```{r fig22_gplot2, eval=FALSE}
+```{r fig22_gplot2}
 sm + geom_bar(binwidth=1, colour="black") +
   theme_igray() +
   scale_fill_tableau("tableau20")
@@ -618,7 +618,7 @@ sm + geom_bar(binwidth=1, colour="black") +
 
 We can also start to work on the line colour and the line weight in the function to try to clarify the plot.
 
-```{r fig23_gplot2, eval=FALSE}
+```{r fig23_gplot2}
 sm + geom_bar(binwidth = 1, colour = "gray", size = .25) +
   theme_igray(base_family = "Helvetica") +
   scale_fill_tableau("tableau20")
@@ -632,7 +632,7 @@ As this suggests stacked bar charts present communication difficulties. That is 
 
 We could try this as a stacked area graph as follows.
 
-```{r fig24_gplot2, eval=FALSE}
+```{r fig24_gplot2}
 sm <- ggplot(main, aes(pubyear, y = n, fill = pubcode, order = pubcode)) +
    geom_area() +
    theme_igray(base_family = "Helvetica") +
@@ -667,7 +667,7 @@ For demonstration we will walk through some options:
 
 If we choose `facet_grid` we will see a line of plots. The main issue that arises here is adjusting the labelling on the x axis. We can do that by adding `scale_x_continuous` and specifying the breaks and values we want to see. We could also as needed change the labels by adding to the function like this `scale_x_continuous(breaks = c(1970, 2010), labels = c(label1, label2))`.
 
-```{r fig25_gplot2, eval=FALSE}
+```{r fig25_gplot2}
 f + facet_grid(~pubcode, shrink = TRUE) +
   scale_x_continuous(breaks = c(1970, 2010))
 ```
@@ -678,7 +678,7 @@ However, the above plot suffers from being too vertical and the labels remain sq
 
 An alternative option for a clearer plot might be to use the groups that we created in the data table to facet on.
 
-```{r fig26_gplot2, eval=FALSE}
+```{r fig26_gplot2}
 f + facet_grid(pubcode~group, shrink = TRUE) +
   theme(legend.position = "none") +
   scale_x_continuous(breaks = c(1970, 2010))
@@ -692,7 +692,7 @@ That is an improvement, as we can see the three groups, but note that the countr
 
 To create a more reasonable plot we can use `facet_wrap()`. Note that the position of the group has been reversed to `group~pubcode` to achieve this plot.
 
-```{r fig27_gplot2, eval=FALSE}
+```{r fig27_gplot2}
 f + facet_wrap(group~pubcode) +
   theme(legend.position = "none")
 ```
@@ -703,7 +703,7 @@ What we now see is a facet plot that is ordered from group 1 to group 3. This is
 
 While we would generally want to drop some of the smallest values, to improve this type of plot we might try freeing up the scales. In this case we focus on the y axis by specifying `free_y` with the alternative being `free_x`.
 
-```{r fig28_gplot2, eval=FALSE}
+```{r fig28_gplot2}
 f + facet_wrap(group~pubcode, scales ="free_y") +
   theme(legend.position = "none")
 ```
@@ -712,7 +712,7 @@ f + facet_wrap(group~pubcode, scales ="free_y") +
 
 This removes the compression and gives each individual plot its own scale. The default for facets is to show the highest values at the bottom right (the default of argument `as.table`). If we specify `as.table = FALSE` the facets will show the higher values (in group 3) first. This might improve the plot.
 
-```{r fig29_gplot2, eval=FALSE}
+```{r fig29_gplot2}
 f + facet_wrap(group~pubcode, scales ="free_y", as.table = FALSE) +
   theme(legend.position = "none")
 ```
@@ -723,7 +723,7 @@ Note that this still presents some problems as ideally the highest value (the US
 
 We will revert to the ascending order but keep the free y axis. We could if we wished add a regression to show the trend by country by adding `geom_smooth()`. We will remove the standard error area by specifying `se = FALSE`.
 
-```{r fig30_gplot2, warning=FALSE, eval=FALSE}
+```{r fig30_gplot2, warning=FALSE}
 f + facet_wrap(group~pubcode, scales ="free_y", as.table = TRUE) +
   geom_smooth(se = FALSE) +
   theme(legend.position = "none")
@@ -750,7 +750,7 @@ g1 <- ggplot(g, aes(x = pubyear, y = n, color = pubcode)) +
 
 We can now try again with our trend line using `geom_smooth`. 
 
-```{r  fig32_gplot2, warning=FALSE, eval=FALSE}
+```{r  fig32_gplot2, warning=FALSE}
 g1 + facet_wrap(group~pubcode, scales ="free_y", as.table = TRUE) +
   geom_smooth(se = FALSE) +
   theme(legend.position = "none")
@@ -772,7 +772,7 @@ Creating a pie chart in ggplot takes some thought. As is often the case when wor
 
 The first step is to create an object as a stacked chart. In this case we attribute a single value to the x axis, specify the y axis as percent and then the fill as publication code. This creates a stacked bar chart.
 
-```{r fig33_gplot2, eval=FALSE}
+```{r fig33_gplot2}
 o1 <- ggplot(pc, aes(x=1, y = percent, fill = pubcode)) + geom_bar(stat = "identity")
 o1
 ```
@@ -789,7 +789,7 @@ If we now enter y in the console we will see a pie chart. The remaining steps in
 
 The following adds black lines to define the pie segments. Because these lines are then reflected in the legend the argument overrides this by using colour = NA.
 
-```{r fig34_gplot2, eval=FALSE}
+```{r fig34_gplot2}
 z <- y + geom_bar(stat = "identity", colour = "black") +
   guides(fill=guide_legend(override.aes=list(colour=NA)))
 z
@@ -799,7 +799,7 @@ z
 
 Then remove the various tick marks
 
-```{r fig35_gplot2, eval=FALSE}
+```{r fig35_gplot2}
 z <- z +
     theme(axis.ticks=element_blank(),
           axis.title=element_blank(),
@@ -818,7 +818,7 @@ y.breaks <- cumsum(pc$percent) - pc$percent/2
 
 If we print y.breaks to the console we will a list of values.
 
-```{r fig36_gplot2, eval=FALSE}
+```{r fig36_gplot2}
 q <- z +
     theme(axis.text.x=element_text(color='black')) +
     scale_y_continuous(
@@ -845,7 +845,7 @@ cx <- filter(pc, group %in% 3)
 
 We start the plot by creating a bar chart. Note that we are using the value of `n` here for the y axis. This could be changed to percent or another value as needed. 
 
-```{r fig37_gplot2, eval=FALSE}
+```{r fig37_gplot2}
 cx1 <- ggplot(cx, aes(x = pubcode, y = n, fill= pubcode)) +
   geom_bar(stat="identity")
 cx1
@@ -855,7 +855,7 @@ cx1
 
 We them add a `coord_polar` specifying theta in this case as x (the pubcode). The remainder of the code is thematic.
 
-```{r fig38_gplot2, eval=FALSE}
+```{r fig38_gplot2}
 cx1 + coord_polar(theta="x") +
    theme_light() +
    theme(legend.position="none") +
@@ -872,7 +872,7 @@ In the R Graphics Cookbook, Winston Chang adds three observations about coxcomb 
 In this article we have covered two main topics.
 
 1.  How to prepare data for graphing in R using the `dplyr` package.
-2.  How to draw a range of graphs and the issues encountered using ggplot.
+2.  How to draw a range of graphs and the issues encountered using ggplot2.
 
 In this article we have not explored the full potential of visualisation options in ggplot2, such as heat maps and choropleth maps. These topics are regularly covered on sites such as [r-bloggers.com](http://www.r-bloggers.com). However, we have seen that it is possible to construct graphics from the bottom up using simple code and specifying the details we would like to see.
 
