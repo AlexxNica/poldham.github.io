@@ -8,7 +8,9 @@ published: true
 
 This article focuses on visualising patent data in networks using the open source software [Gephi](http://gephi.github.io). Gephi is a well known free network visualisation tool that, when you are familiar with the basics, is very easy to use to create effective network visualisations. 
 
-For this article we will use the synthetic biology patent dataset developed by Paul Oldham based on a simple search of the Thomson Innovation database using key terms. The dataset consists of 576 first filings of patent applications linked to 2,882 Family members worldwide. The dataset has been extensively cleaned and is described in detail in the codebook [here](). The dataset serves to provide an insight into a new and emerging areas of science and technology in training exercises but does not provide the full patent landscape. 
+![_config.yml]({{ site.baseurl }}/images/figures_gephi/Gephifront.png)
+
+For this article we will use the synthetic biology patent dataset developed by Paul Oldham based on a simple worldwide search of the Thomson Innovation database using the key terms `"synthetic biology" or "synthetic genomics" or "synthetic genome" or "synthetic genomes"`(for background see this [article](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0034368)). The dataset consists of 576 first filings of patent applications (INPADOC families) linked to 2,882 INPADOC Family Members worldwide. The dataset has been extensively cleaned and the cleaning steps are described in detail in the codebook [here](). The dataset provides an insight into a new and emerging areas of science and technology for use in training exercises but does not provide the full patent landscape. 
 
 We will use the Excel version of the dataset in this article and it can be downloaded [here](). 
 
@@ -16,7 +18,7 @@ We will use the Excel version of the dataset in this article and it can be downl
 
 To install Gephi follow the installation instructions from the home page [here](http://gephi.github.io/users/install/). After you have finished this article you may want to follow the [Quick start guide](https://gephi.github.io/tutorials/gephi-tutorial-quick_start.pdf) although we will cover those topics. 
 
-Gephi suffers from a known issue for Mac users. That is, it requires Java 6 which is not installed by default on Macs. To resolve this you should follow the instructions posted [here](http://sumnous.github.io/blog/2014/07/24/gephi-on-mac/). It basically involves downloading a Mac version of Java containing Java 6 and then running three or four commands in the Terminal on the mac to configure Gephi. It is easy. If that doesn't work try this more [detailed approach](https://lbartkowski.wordpress.com/2014/11/28/gephi-0-8-2-on-apple-osx-yosemite/). 
+Gephi suffers from a known issue for Mac users. That is, it requires Java 6 which is not installed by default on Macs. To resolve this you should follow the instructions posted [here](http://sumnous.github.io/blog/2014/07/24/gephi-on-mac/). It basically involves downloading a Mac version of Java containing Java 6 and then running three or four commands in the Terminal on the Mac to configure Gephi. It is easy. If that doesn't work try this more [detailed approach](https://lbartkowski.wordpress.com/2014/11/28/gephi-0-8-2-on-apple-osx-yosemite/). 
 
 ##Opening Gephi and Installing Plugins
 
