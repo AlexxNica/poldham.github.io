@@ -3,7 +3,7 @@ layout: post
 title: "An Overview of Open Source Tools for Patent Analytics"
 author: "Paul Oldham"
 date: "26 July 2015"
-punblished: true
+published: true
 ---
 
 This article provides an overview of the open source and free software tools that are available for patent analytics. The aim of the article is to serve as a quick reference guide for some of the main tools in the tool kit. We will go into some of these tools in more depth elsewhere in the WIPO Open Source Patent Analytics Manual and leave you to explore the rest of the tools for yourself. 
