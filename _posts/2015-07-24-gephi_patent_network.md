@@ -2,23 +2,25 @@
 layout: post
 title: "Patent Network Visualisation with Gephi"
 author: "Paul Oldham"
-date: "24 July 2015"
-published: false
+date: "29 July 2015"
+published: true
 ---
 
-This article focuses on visualising patent data in networks using the open source software [Gephi](http://gephi.github.io). Gephi is a well known free network visualisation tool that, when you are familiar with the basics, is very easy to use to create effective network visualisations. 
+This article focuses on visualising patent data in networks using the open source software [Gephi](http://gephi.github.io). Gephi is one of a growing number of free network analysis and visualisation tools with others including [Cytoscape](http://www.cytoscape.org), [Tulip](http://tulip.labri.fr/TulipDrupal/), [GraphViz](http://www.graphviz.org), [Pajek](http://mrvar.fdv.uni-lj.si/pajek/) for Windows, and [VOSviewer](http://www.vosviewer.com/Home) to name but a few. In addition, network visualisation packages are available for R and Python. We have chosen to focus on Gephi because it is a good all round network visualisation tool that is quite easy to use and to learn. 
 
 ![_config.yml]({{ site.baseurl }}/images/figures_gephi/Gephifront.png)
 
-For this article we will use the synthetic biology patent dataset developed by Paul Oldham based on a simple worldwide search of the Thomson Innovation database using the key terms `"synthetic biology" or "synthetic genomics" or "synthetic genome" or "synthetic genomes"`(for background see this [article](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0034368)). The dataset consists of 576 first filings of patent applications (INPADOC families) linked to 2,882 INPADOC Family Members worldwide. The dataset has been extensively cleaned and the cleaning steps are described in detail in the codebook [here](). The dataset provides an insight into a new and emerging areas of science and technology for use in training exercises but does not provide the full patent landscape. 
+In this article we will focus on creating a simple network visualisation of the relationship between patent applicants (assignees). However, network visualisation can be used to visualise a range of fields and relationships, such as inventors, key words, IPC and CPC codes, and citations among other options. 
 
-We will use the Excel version of the dataset in this article and it can be downloaded [here](). 
+For this article we will use the synthetic biology patent dataset developed by Paul Oldham based on a simple worldwide search of the Thomson Innovation database using the key terms `"synthetic biology" or "synthetic genomics" or "synthetic genome" or "synthetic genomes"`(for background see this [article](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0034368)). The dataset consists of 576 first filings of patent applications (INPADOC families) linked to 2,882 INPADOC Family Members worldwide. The dataset has been extensively cleaned and the cleaning steps are described in detail in the codebook [here](https://github.com/poldham/opensource-patent-analytics/blob/master/2_datasets/synbio_patents/synbio_patents_code_book_12052015.txt). The dataset has been developed to provide an insight into the emergence of patent activity for synthetic biology. However, it does not provide the complete patent landscape for this emerging field. In addition, this dataset provides a useful sample of the range of data fields that are available from the commercial [Thomson Innovation](http://info.thomsoninnovation.com) platform. 
+
+We will use the Excel version of the dataset in this article and it can be downloaded [here](https://github.com/poldham/opensource-patent-analytics/blob/master/2_datasets/synbio_patents/synbio_inventors.xlsx?raw=true). 
 
 ###Installing Gephi
 
-To install Gephi follow the installation instructions from the home page [here](http://gephi.github.io/users/install/). After you have finished this article you may want to follow the [Quick start guide](https://gephi.github.io/tutorials/gephi-tutorial-quick_start.pdf) although we will cover those topics. 
+To install Gephi follow the installation instructions from the home page [here](http://gephi.github.io/users/install/). After you have finished this article you may want to follow the [Quick start guide](https://gephi.github.io/tutorials/gephi-tutorial-quick_start.pdf) although we will cover those topics in the article. The [Learn section])(http://gephi.github.io/users/) of the website provides additional tutorials. 
 
-Gephi suffers from a known issue for Mac users. That is, it requires Java 6 which is not installed by default on Macs. To resolve this you should follow the instructions posted [here](http://sumnous.github.io/blog/2014/07/24/gephi-on-mac/). It basically involves downloading a Mac version of Java containing Java 6 and then running three or four commands in the Terminal on the Mac to configure Gephi. It is easy. If that doesn't work try this more [detailed approach](https://lbartkowski.wordpress.com/2014/11/28/gephi-0-8-2-on-apple-osx-yosemite/). 
+Gephi suffers from a known issue for Mac users. That is, it requires Java 6 which is not installed by default on Macs. To resolve this you should follow the instructions posted [here](http://sumnous.github.io/blog/2014/07/24/gephi-on-mac/). It basically involves downloading a Mac version of Java containing Java 6 and then running three or four commands in the Terminal on the Mac to configure Gephi. It is easy and will save hours of frustration. If that doesn't work try this more [detailed approach](https://lbartkowski.wordpress.com/2014/11/28/gephi-0-8-2-on-apple-osx-yosemite/). 
 
 ##Opening Gephi and Installing Plugins
 
@@ -26,13 +28,13 @@ When you have installed Gephi, open it and you should see the following welcome 
 
 ![_config.yml]({{ site.baseurl }}/images/figures_gephi/fig1_gephi_welcome.png)
 
-Before we do anything else, we need to install a plugin developed by Clement Levallois to convert Excel and csv files into gephi network files. To install the plugin select the Tools menu in the bar and Plugins
+Before we do anything else, we need to install a plugin developed by [Clement Levallois](http://www.em-lyon.com/en/faculty-research-education/faculty-research/international-business-school-professors/Permanent-Professors/Clement-LEVALLOIS) to convert Excel and csv files into gephi network files. To install the plugin select the `Tools` menu in the menu bar and then `Plugins`.
 
 ![_config.yml]({{ site.baseurl }}/images/figures_gephi/fig2_plugins.png)
 
-You will see a pop up menu for the plugins. At this point you may want to press Reload Catalog to make sure everything is loaded. Then head to Available Plugins. Click on name to sort them alphabetically. You now want to look for a plugin called `Convert Excel and csv files to networks`. Select the check box and then `Install`. 
+You will see a pop up menu for the plugins. At this point you may want to press `Reload Catalog` to make sure everything is loaded. Then head to `Available Plugins`. Click on `name` to sort them alphabetically. You now want to look for a plugin called `Convert Excel and csv files to networks`. Select the check box and then `Install`. 
 
-While you are here, one very useful plugin that is not installed by default is Nooverlap. This is very helpful for preventing nodes in network maps from overlapping. Find this plug in and install it now or you will need to do this later. 
+While you are here, one very useful plugin that is not installed by default is `Nooverlap`. This is very helpful for preventing nodes in network maps from overlapping. Find this plug in and install it now or you will need to do this later. 
 
 You will need to restart Gephi for it to take effect but if you return to the Plugins menu and then choose the installed tab you should see this.
 
@@ -42,7 +44,7 @@ You are good to go. While you are there you may want to check out the other plug
 
 ##Importing a file to Gephi with the converter plugin
 
-We will concentrate on using the `synbio` patent dataset in the Excel version [here](). While Gephi works with .csv files, the import plugin includes a timeline option that only works with Excel. For that reason we will use the Excel version.
+We will concentrate on using the `synbio` patent dataset in the Excel version [here](https://github.com/poldham/opensource-patent-analytics/blob/master/2_datasets/synbio_patents/synbio_inventors.xlsx?raw=true). While Gephi works with .csv files, the import plugin includes a timeline option that only works with Excel. For that reason we will use the Excel version.
 
 ***Step 1. Open Gephi and Choose File > Import Spigot***
 
@@ -50,7 +52,7 @@ For this to work we need to use the Import Spigot function under the File menu. 
 
 ![_config.yml]({{ site.baseurl }}/images/figures_gephi/fig4_import_spigot.png)
 
-When you have chosen `Data importer(co-occurrences)` then choose `Next`. Make sure the column headers stays selected (unless using your own data). You will then need to choose a delimiter. In this case it is a comma but in other cases it may be a semicolon or a tab. Select the `synbio.xlsx` file that you have downloaded from [here]().
+When you have chosen `Data importer(co-occurrences)` then choose `Next`. Make sure the column headers stays selected (unless using your own data). You will then need to choose a delimiter. In this case it is a comma but in other cases it may be a semicolon or a tab. Select the `synbio.xlsx` file that you have downloaded from [here](https://github.com/poldham/opensource-patent-analytics/blob/master/2_datasets/synbio_patents/synbio_inventors.xlsx?raw=true).
 
 ![_config.yml]({{ site.baseurl }}/images/figures_gephi/fig5_idelimiter.png)
 
@@ -58,11 +60,11 @@ We now need to choose the agents, that is the actors or objects that we want to 
 
 ![_config.yml]({{ site.baseurl }}/images/figures_gephi/fig6_selection.png)
 
-In the next step we need to specify the delimiter for splitting the contents of the applicants_organisations column. In all the fields it is a semicolon so let's choose that. 
+In the next step we need to specify the delimiter for splitting the contents of the `patent_assignees_cleaned` column. In all the fields it is a semicolon so let's choose that. 
 
 ![_config.yml]({{ site.baseurl }}/images/figures_gephi/fig6b_delimiter.png)
 
-We will then be asked if we want a dynamic network. This presently only works with Excel files so in this case we are using the Excel version. Because this dataset has been deduplicated on first filings (INPADOC First Family Member Numbers) we will select the `priority_year_earliest` field as below for our time series filter. 
+We will then be asked if we want a dynamic network. This presently only works with Excel files so in this case we are using the Excel version. Because this dataset has been deduplicated on first filings (INPADOC First Family Member Numbers) we will select the `priority_year_earliest` field as below for our time series filter. That will give use the year that is closest to the research and development that led to the submission of the original application. 
 
 ![_config.yml]({{ site.baseurl }}/images/figures_gephi/fig7_yearselection.png)
 
@@ -82,34 +84,33 @@ Next we will see a create network screen setting out our choices.
 
 Press Finish
 
-Next we will see an import screen 
+Next we will see an import screen. 
 
 ![_config.yml]({{ site.baseurl }}/images/figures_gephi/fig12_import.png)
 
-This tells us that we have some problems with the year field not being formatted correctly (it is unclear what that problem is).
+We will often see a message telling us that there is a problem with the year field not being correctly formatted. It is not clear what this actually means but check the data in the data laboratory after import if this happens (see below). 
 
 We have left the defaults as is. Note that this is an undirected graph (meaning that we do not believe there is a causal relationship between any of the elements in the data). Undirected is generally the default for patent data. 
 
-Note that Gephi is telling us that there are 2009 nodes in the network and 114 edges (links). That suggests that this is quite a sparse graph in terms of connections and clusters. 
+Note that Gephi is telling us that there are 362 nodes in the network and 176 edges (links). That suggests that this is quite a sparse graph in terms of connections and clusters. 
 
 Click OK. You should now see a raw network that looks like this. 
 
 ![_config.yml]({{ site.baseurl }}/images/figures_gephi/fig13_raw_network.png)
 
-We can now see a set of tabs in the top left. Before we go any further let's take a look at the Data Laboratory. When we look in the Nodes we can see that under frequency (the count of our publication records) the highest value is for NA for Not Available. The reason for this is that we have focused on mapping patent applicants that are organisations (rather than the names of individuals). 
+We can now see a set of tabs in the top left. Before we go any further let's take a look at the `Data Laboratory`. When we look in the `Nodes` we can see that under frequency (the count of our publication records) the highest value is for NA for Not Available. The reason for this is that we have focused on mapping patent applicants that are organisations (rather than the names of individuals). 
 
 ![_config.yml]({{ site.baseurl }}/images/figures_gephi/fig14_nodes.png)
 
 To remove the NA values right click and select Delete. Then confirm the deletion. This will prevent NA from showing up as a large node on the network diagram. Note that you can always exclude nodes after you have laid out the network. 
 
 While we are here in the data laboratory let's note the division of the data into two sections. 
-
 1. A set of nodes. 
 2. A set of edges. 
 
-The nodes are the organisations (or inventors etc.). In this case the frequency refers to the count of the number of records where the organisation name appears (publication numbers in the Patentscope data). Note that it is possible to export the nodes table as a .csv file to add information to it and then reimport it. If choosing this option it is generally best to first sort the nodes table alphabetically as it is easier to get right. 
+The nodes are the organisations (or inventors, keywords etc.). In this case the frequency refers to a count of the number of times an organisation name appears and is very close to, bout not quite matching, the count of records in the set . Note that it is possible to export the nodes table as a .csv file to add information to it and then reimport it. If choosing this option it is generally best to first sort the nodes table alphabetically as it is easier to get right. 
 
-The edges table involves a source and a target where the source is the source node and the target is another node where there is a link between the nodes. We can see the edges table sorted alphabetically (click the source heading to sort) where the value in weight is the number of shared records.
+The edges table involves a source and a target, where the source is the source node and the target is another node where there is a link between the nodes. We can see the edges table sorted alphabetically (click the source heading to sort) where the value in weight is the number of shared records.
 
 ![_config.yml]({{ site.baseurl }}/images/figures_gephi/fig15_edges.png)
 
@@ -268,9 +269,10 @@ Congratulations, you have now created your first Gephi network graph.
 
 ###Resources
 
-[Gephi website](http://gephi.github.io/)
-Quick start [guide](https://gephi.github.io/tutorials/gephi-tutorial-quick_start.pdf)
-Installation instructions for [All platforms](http://gephi.github.io/users/install/).
+1.  [Gephi website](http://gephi.github.io/)
+2.  Quick start [guide](https://gephi.github.io/tutorials/gephi-tutorial-quick_start.pdf)
+3.  Installation instructions for [All platforms](http://gephi.github.io/users/install/).
 Gephi suffers from a known issue for Mac users. That is, it uses Java 6 which is not installed by default on Macs. To resolve this you should follow the instructions posted [here](http://sumnous.github.io/blog/2014/07/24/gephi-on-mac/) and works very well in most cases. It basically involves downloading a mac version of Java containing Java 6 and then running three or four commands in the Terminal on the mac to configure Gephi. If that doesn't work try this more [detailed account](https://lbartkowski.wordpress.com/2014/11/28/gephi-0-8-2-on-apple-osx-yosemite/). 
-[Excel/csv converter to network plugin](https://marketplace.gephi.org/plugin/excel-csv-converter-to-network/)
+4.  [Excel/csv converter to network plugin](https://marketplace.gephi.org/plugin/excel-csv-converter-to-network/)
+5. For ideas on patent network visualisation you might want to try this article on [synthetic biology](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0034368), this [article](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0078737) on species names in patent data, and the use of exploratory network analysis using IPC/CPC cooccurrence analysis in the [WIPO Patent Landscape for Animal Genetic Resources](http://www.wipo.int/patentscope/en/programs/patent_landscapes/reports/animal_gr.html). For more try this [Google Search](https://www.google.co.uk/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=patent%20network%20analysis).
 
