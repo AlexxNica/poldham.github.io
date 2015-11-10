@@ -1,9 +1,10 @@
 ---
-layout: post
 title: "An Overview of Open Source Tools for Patent Analytics"
 author: "Paul Oldham"
 date: "26 July 2015"
-punblished: true
+output: pdf_document
+punblished: yes
+layout: post
 ---
 
 This article provides an overview of the open source and free software tools that are available for patent analytics. The aim of the article is to serve as a quick reference guide for some of the main tools in the tool kit. We will go into some of these tools in more depth elsewhere in the WIPO Open Source Patent Analytics Manual and leave you to explore the rest of the tools for yourself. 
@@ -38,7 +39,7 @@ Many patent analysts will use Excel as a default programme including basic clean
 
 Google Sheets require a free Google account and those who are comfortable with Excel may wonder why it is worth switching. However, Google Sheets can be shared online with others and there are a large number of free add ons that could be used to assist with cleaning data such as Split Names or Remove duplicates as shown below. 
 
-![_config.yml]({{ site.baseurl }} /images/overview/google_sheets_addon.png)
+![title](/images/overview/google_sheets_addon.png)
 
 ***3. [Google Fusion Tables](https://support.google.com/fusiontables/answer/2571232?hl=en)***
 
