@@ -116,7 +116,7 @@ The examples are there to help you. In `rplos` they presently focus on the use o
 The author of this article is a big fan of pizza. So, in the first example we will carry out a simple search for the term pizza and then specify the results we want to see using the argument `fl =` (for fields) and the number of results that we want to see using `limit = 20`. In specifying the fields we will use `c()` to combine them together.
 
 ```{r searchplos1, eval=FALSE, cache=TRUE, tidy.opts=list(width.cutoff = 40)}
-p <- searchplos(q = "pizza", fl = c("id","publication_date", "title", "abstract"), limit = 20)
+a <- searchplos(q = "algeria", fl = c("id","publication_date", "title", "abstract"), limit = 20)
 ```
 
 What `searchplos()` has done in the background is to send a request to the PLOS API to bring back the id, publication_date, title and abstract for 20 records across the PLOS journals. To see the results type:
